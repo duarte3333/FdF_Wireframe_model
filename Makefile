@@ -2,10 +2,13 @@ NAME := test
 
 CC := gcc
 
-CFLAGS := -O2 -Wall -Wextra #-Werror
+CFLAGS := -O2 -Wall -Wextra -fsanitize=address -g#-Werror
 
 SOURCE := main.c \
-	  get_next_line.c
+	  get_next_line.c \
+	  read_map.c \
+	  create_points.c \
+	  draw_grid.c
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -22,8 +25,8 @@ ${LIB_NAME}: ${OBJS}
 
 all: ${LIB_NAME}
 	make -C $(MINILIBX)
-	make -C $(LIBFT)
-	$(CC) $(CFLAGS) $(SOURCE) $(LIB_MINILIBX) -o $(NAME)
+	make bonus -C $(LIBFT)
+	$(CC) $(CFLAGS) $(SOURCE) $(LIB_MINILIBX) $(LIB_LIBFT) -o $(NAME)
 
 clean:
 

@@ -39,18 +39,33 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+void draw_img(t_data img)
+{
+	int i;
+
+	i = 100;
+	while (i)
+	{
+		my_mlx_pixel_put(&img, 100, i, 0x00FF0000);
+		i--;
+	}
+}
+
+
 int	main(void)
 {
 	t_data	img;
 	t_vars	vars;
-	int		i;
+	t_list 	*a;
+	t_point *lpoints;
+	t_point	*iso_points;
+	char ***map;
 
-	i = 100;
-	ft_extract_map("42.fdf");
+    a = ft_extract_map("42.fdf");
+    map = parse_matrix(a);
 	vars.mlx = mlx_init();
 	if (vars.mlx == NULL)
 		return (MLX_ERROR);
-
 	vars.win = mlx_new_window(vars.mlx, WINDOW_WIDTH , WINDOW_HEIGHT, "Hello world!");
 	if (vars.win == NULL)
 	{
@@ -62,15 +77,15 @@ int	main(void)
 								&img.endian);
 			
 	//Hooks
-	//mlx_loop_hook(data.mlx_ptr, &render, &data);
-	mlx_hook(vars.win, 2, 1L<<0, handle_keypress, &vars);
-	mlx_key_hook(vars.win, key_hook, &vars);
+	//mlx_hook(vars.win, 2, 1L<<0, handle_keypress, &vars);
+	//mlx_key_hook(vars.win, key_hook, &vars);
 
-	while (i)
-	{
-		my_mlx_pixel_put(&img, i, i, 0x00FF0000);
-		i--;
-	}
+	lpoints = ft_create_points(map);
+	iso_points = ft_transform_iso(lpoints);
+	draw_img_grid(img, iso_points);
+
+
+
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_loop(vars.mlx);
 	mlx_destroy_display(vars.mlx);

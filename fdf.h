@@ -32,9 +32,26 @@ typedef struct	s_data {
 typedef struct	s_vars {
 	void	*mlx;
 	void	*win;
+
 }				t_vars;
 
+typedef struct	s_point {
+	float				x;
+	float				y;
+	float				z;
+	struct s_point	*next;
+}				t_point;
 
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int 	count_digits(char *s);
+void    print_triple_list(char ***tri_list);
+t_list 	*ft_extract_map(char *file);
+char 	***parse_matrix(t_list *matrix);
+t_point	*ft_lstlast_point(t_point *lst);
+t_point	*ft_lstnew_point(float x, float y, float z);
+void	ft_lstadd_back_point(t_point **lst, t_point *new);
+t_point *ft_create_points(char ***triple);
+t_point *ft_transform_iso(t_point *points);
+void draw_img_grid(t_data img, t_point *iso_points);
 char	*get_next_line(int fd);
-int **ft_extract_map(char *file)
 #endif
