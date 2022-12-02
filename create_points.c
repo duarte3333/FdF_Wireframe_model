@@ -12,6 +12,7 @@ t_point	*ft_lstnew_point(float x, float y, float z)
 	new->y = y;
 	new->z = z;
 	new->next = NULL;
+    new->prev = NULL;
 	return (new);
 }
 
@@ -36,6 +37,7 @@ void	ft_lstadd_back_point(t_point **lst, t_point *new)
 		{
 			last = ft_lstlast_point(*lst);
 			last->next = new;
+            new->prev = *lst;
 		}
 		else
 			*lst = new;
@@ -46,40 +48,32 @@ t_point *ft_create_points(char ***triple)
 	int i;
 	int j;
 	t_point	*point;
-    t_point *tmp;
 
 	i = 0;
 	point = ft_lstnew_point(i, 0, ft_atoi(triple[i][0])); 
-	tmp = point;
     while (triple[i])
 	{
 		j = 0;
 		while (triple[i][j])
 		{
-            //printf("%d\n", j);
-			ft_lstadd_back_point(&point, ft_lstnew_point((float)i, (float)j, (float)ft_atoi(triple[i][j])));
-			//printf("(%f, %f)\n", point->x, point->y);
+			ft_lstadd_back_point(&point, ft_lstnew_point((float)i, (float)(-j), (float)ft_atoi(triple[i][j])));
+			printf("(%f, %f)\n", point->x, point->y);
             point = point->next;
             j++;
 		}
 		i++;
 	}
-    point = tmp;
     return (point);
 }
 
 t_point *ft_transform_iso(t_point *points)
 {
-    t_point *temp;
-
-    temp = points;
-    while (points)
+    while (points->prev != NULL)
     {
-        points->x  = (points->x - points->y) * cos(0.523599);
-        points->y  = -(points->z) + (points->x + points->y) * sin(0.523599);
-        //printf("(%f, %f)\n", points->x, points->y);
-        points = points->next;
+        points->x = (points->x - points->y) * cos(0.523599);
+        points->y = -(points->z) + (points->x + points->y) * sin(0.523599);
+        printf("(%f, %f)\n", points->x, points->y);
+        points = points->prev;
     }
-    points = temp;
     return (points);
 }

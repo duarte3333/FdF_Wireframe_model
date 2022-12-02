@@ -40,6 +40,7 @@ typedef struct	s_point {
 	float				y;
 	float				z;
 	struct s_point	*next;
+	struct s_point	*prev;
 }				t_point;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);

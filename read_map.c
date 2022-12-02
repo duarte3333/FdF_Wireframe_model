@@ -88,7 +88,7 @@ char ***parse_matrix(t_list *matrix)
         matrix = matrix->next;
         i++;
     }
-    //print_triple_list(map);
+    print_triple_list(map);
 	return (map);
 }
 
