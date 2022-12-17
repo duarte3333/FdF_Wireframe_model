@@ -16,7 +16,7 @@
 //Se a string for vazia retorna 0
 //Se a string nao tiver \n retorna o seu size
 //Se a string tive \n retorna o seu size + 1
-static size_t	ft_strlen(const char *str)
+static size_t	ft_strlen_nl(const char *str)
 {
 	int	i;
 
@@ -45,7 +45,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = 0;
 	j = -1;
-	size_concat = ft_strlen(s1) + ft_strlen(s2);
+	size_concat = ft_strlen_nl(s1) + ft_strlen_nl(s2);
 	concat = (char *)malloc(size_concat + 1 * sizeof(char));
 	if (!concat)
 		return (NULL);

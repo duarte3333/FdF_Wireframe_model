@@ -7,8 +7,9 @@ CFLAGS := -O2 -Wall -Wextra -fsanitize=address -g#-Werror
 SOURCE := main.c \
 	  get_next_line.c \
 	  read_map.c \
-	  create_points.c \
-	  draw_grid.c
+	  draw_grid.c \
+	  color.c \
+	  keys_managment.c
 
 OBJS	= ${SRCS:.c=.o}
 

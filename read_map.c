@@ -1,104 +1,69 @@
 #include "fdf.h"
 
-int count_digits(char *s)
+//Esta funcao irá guardar o maximo elemento z e o minimo nas vars
+void   ft_max_and_min(int nb, t_vars *vars)
 {
-    int i;
-    int counter;
-
-    i = 0;
-    counter = 0;
-    while (s[i])
-    {
-        if (ft_isdigit(s[i]))
-            counter++;
-        i++;
-    }
-    return (counter);
+    if (!vars->max_z || nb > vars->max_z)
+        vars->max_z = nb;
+    if (!vars->min_z || nb < vars->min_z)
+        vars->min_z = nb;
 }
-
-void    print_triple_list(char ***tri_list)
+//Faco ft_split() da line que recebo
+//Conto o size, para saber numero de cols e fazer o malloc()
+//Depois, transformo cada elemento do output
+//do ft_split() em inteiro usando o ft_atoi()
+//Output por exemplo sera: map[i] = {1, 0, 0, 0}
+int    *split_array(t_vars *vars, char *line)
 {
-    int i;
-    int j;
-    int k;
-
-    i = 0;
-    printf("{\n");
-    while (tri_list[i])
-    {
-        printf("[");
-        j = 0;
-        while (tri_list[i][j])
-        {
-            k = 0;
-            printf("{");
-            while (tri_list[i][j][k])
-            {
-                if (tri_list[i][j][k] != '\n')
-                    printf("%c", tri_list[i][j][k]);
-                k++;
-            }
-            printf("}");
-            j++;
-        }
-        i++;
-        printf("]\n");
-    }
-    printf("}\n");
-}
-
-t_list *ft_extract_map(char *file)
-{
-    t_list    *matrix;
-    t_list    *new;
-    t_list    *tmp;
-    int fd;
-
-    fd = open(file, O_RDONLY);
-
-    matrix = ft_lstnew(get_next_line(fd));
-    tmp = matrix;
-    while (matrix->content)
-    {
-        new = ft_lstnew((char *)get_next_line(fd));
-        ft_lstadd_back(&matrix, new);
-        printf("%s\n", matrix->content);
-/*         printf("entrei");
-        printf("%p\n", matrix->next); */
-        matrix = matrix->next;
-    }
-    close(fd);
-    matrix = tmp;
-	return (matrix);
-}
-
-char ***parse_matrix(t_list *matrix)
-{
-    char ***map;
+    int *t;
+    char **temp;
+    int size;
     int i;
 
+    size = 0;
     i = 0;
-    map = (char ***)malloc(sizeof(char **) * (ft_lstsize(matrix)));
-    map[ft_lstsize(matrix) - 1] = 0;
-    while (matrix->content)
+    
+    temp = ft_split(line, ' ');
+    while (temp[size])
+        size++;
+    vars->nb_cols = size;
+    t = malloc(sizeof(int) * size);
+    
+    while (i < size)
     {
-        map[i] = (char **)malloc(sizeof(char *) * (count_digits(matrix->content) + 1));
-        map[i][count_digits(matrix->content)] = 0;
-        map[i] = ft_split(matrix->content, ' ');
-        matrix = matrix->next;
+        t[i] = ft_atoi(temp[i]);
+        ft_max_and_min(t[i], vars);
+        free(temp[i]);
         i++;
     }
-    print_triple_list(map);
-	return (map);
+    free(temp);
+    return(t);
 }
 
+//Esta funcao vai recursivamente contar o numero de linhas do ficheiro .txt,
+//ou seja, vai "prender a funcao" ate acabar de contar as linhas do ficheiro
+// para fazer o malloc do map : map = { "linha1", "linha2", ... } 
+//Depois de prender vai acabar o que começou e a cada linha que le, 
+//vai fazer ft_split() e transformar o output disso em numero
+//Quando chegar ao final do ficheiro, o ultimo elemento do map será NULL
+//Output por exemplo sera: map = {{1,0,0,0}, {1,0,1,0}, {0,0,0,0}}
+void    map_loading(t_vars *vars, int fd, int index)
+{
+    char *line;
+    
+    line = get_next_line(fd);
+    vars->nb_lines++;
+    if (line)
+        map_loading(vars, fd, index + 1);
+    else
+        vars->map = malloc(sizeof(int *) * vars->nb_lines);
+    if (line)
+    {
+        vars->map[index] = split_array(vars, line);
+    }
+    else
+        vars->map[index] = line;
+    free(line);
+}
 
-
-// int main()
-// {
-//     t_list *a;
-//     a = ft_extract_map("42.fdf");
-//     parse_matrix(a);
-//     return (0);
-// }
 
