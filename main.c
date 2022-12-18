@@ -45,8 +45,8 @@ void	ft_set_variables(t_vars *vars)
 	vars->angle = 0.523599;
 	vars->middle_point_x = vars->last_x - vars->offset_x;
 	vars->middle_point_y = vars->last_x - vars->offset_x;
-	vars->width = vars->nb_cols*vars->size_grid*2;
-	vars->height = vars->nb_lines*vars->size_grid*2;
+	vars->width = 1000;
+	vars->height = 1000;
 }
 
 int	main(int ac, char **av)

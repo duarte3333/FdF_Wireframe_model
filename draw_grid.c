@@ -53,8 +53,9 @@ void map_to_point(t_vars *vars)
 //Executa a projeção isometrica e varia o intervalo dos z's caso sejam negativos
 t_point isometric_projection(t_point a, t_vars *vars)
 {
-    int temp_x;
-    int temp_y;
+    float temp_x;
+    float temp_y;
+
 
     temp_x = a.x;
     temp_y = a.y;
@@ -78,21 +79,48 @@ void  two_points(t_vars *vars, t_point a, t_point b)
     float slope;
     float z_rgb;
     float range;
+    float direction;
     int x;
+    float y;
+    int range_y;
 
     a = isometric_projection(a, vars);
     b = isometric_projection(b, vars);
     x = a.x;
-    slope = (b.y - a.y)/(b.x - a.x);
+    if ((b.x - a.x) == 0)
+    {
+        x++;
+        direction = 1;
+        slope = 0;
+    }
+    else
+    {
+        slope = (b.y - a.y)/(b.x - a.x);
+        direction = (int)(b.x - a.x)/(abs(b.x - a.x));  
+    }
+    //printf("%fdi\n",);
     z_rgb = a.z/vars->new_max;   
     if (b.z - a.z > 0)
         range = (b.z/vars->new_max- z_rgb);
     else
         range = -(a.z/vars->new_max - b.z/vars->new_max);
-    while (x <= b.x)
+    while (x != (int)b.x)
     {
+        y = slope*(x - a.x) + a.y;
         z_rgb = z_rgb + range/((vars->size_grid));
-        my_mlx_pixel_put(vars, x++, slope*(x - a.x) + a.y, percent_to_color(z_rgb, vars->flag));         
+        my_mlx_pixel_put(vars, x, y, percent_to_color(z_rgb, vars->flag));  
+        x += direction;       
+        range_y = abs(y - (slope*(x - a.x) + a.y));
+        if (range_y > 1 && x != (int)b.x)
+        {
+            printf("range% i\n", range_y);
+            while (--range_y)
+            {
+                my_mlx_pixel_put(vars, x, y, percent_to_color(z_rgb, vars->flag)); 
+                y += (int)(b.y - a.y)/(abs(b.y - a.y));
+            }
+        }
+
     }
 }
 
@@ -115,17 +143,18 @@ void draw_img_grid(t_vars *vars)
     int x;
     int y;
     int y_new;
-    int x_new;
 
     y = -1;
-	while (++y < vars->nb_lines - 2)
+	while (++y < vars->nb_lines - 1)
 	{
 		x = 0;
-        while (x < vars->nb_cols - 1)
+        while (x < vars->nb_cols)
 		{
             y_new = vars->nb_lines - 2 - y;
-            two_points(vars, (vars->point_map)[y_new][x] , (vars->point_map)[y_new][x + 1]);
-            two_points(vars, (vars->point_map)[y_new][x] , (vars->point_map)[y_new - 1][x]);
+            if (x < vars->nb_cols - 1)
+                two_points(vars, (vars->point_map)[y_new][x] , (vars->point_map)[y_new][x + 1]);
+            if (y < vars->nb_lines - 2)
+                two_points(vars, (vars->point_map)[y_new][x] , (vars->point_map)[y_new - 1][x]);
             x++;
 		}
 	}
