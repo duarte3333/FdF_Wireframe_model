@@ -1,39 +1,40 @@
-NAME := test
+NAME = fdf
 
-CC := gcc
+CC = cc
 
-CFLAGS := -O2 -Wall -Wextra -fsanitize=address -g#-Werror
+CFLAGS = -O3 -Wall -Wextra -Werror -fsanitize=address -g
 
-SOURCE := main.c \
+SRCS = main.c \
 	  get_next_line.c \
 	  read_map.c \
 	  draw_grid.c \
 	  color.c \
-	  keys_managment.c
+	  keys_managment.c \
+	  transformations.c 
 
 OBJS	= ${SRCS:.c=.o}
 
-LIB_MINILIBX := -Lminilibx -lmlx -lXext -lX11 -lm -lz 
-LIB_LIBFT	:= Libft/libft.a
+LIB_MINILIBX = -Lminilibx -lmlx -lXext -lX11 -lm -lz 
+LIB_LIBFT	= Libft/libft.a
 
-MINILIBX := minilibx/
+MINILIBX = minilibx/
 LIBFT = Libft/
 
-LIB_NAME = fdf.a
-LIBC	= ar rcs
-${LIB_NAME}: ${OBJS}
-	${LIBC} ${LIB_NAME} ${OBJS}
+all: $(NAME) lib
 
-all: ${LIB_NAME}
+$(NAME): $(OBJS) lib
+	$(CC) $(CFLAGS) $(OBJS) $(LIB_MINILIBX) $(LIB_LIBFT) -o $(NAME)
+
+lib:
 	make -C $(MINILIBX)
-	make bonus -C $(LIBFT)
-	$(CC) $(CFLAGS) $(SOURCE) $(LIB_MINILIBX) $(LIB_LIBFT) -o $(NAME)
+	make -C $(LIBFT)
 
 clean:
+	rm -f ${OBJS}
 
 fclean: clean
-		make clean -C $(MINILIBX)
-		make clean -C $(LIBFT)
-		rm -rf $(LIB_NAME)
+	rm -f ${NAME}
+	make clean -C ${MINILIBX}
+	make fclean -C ${LIBFT}
 
 re: fclean all

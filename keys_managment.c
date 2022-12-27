@@ -1,9 +1,10 @@
 #include "fdf.h"
 
-void	ft_close(void *o)
+int	ft_close(void *o)
 {
 	(void) o;
 	exit(0);
+	return(0);
 }
 
 void clean_img(t_vars *vars)
@@ -12,91 +13,38 @@ void clean_img(t_vars *vars)
 	int j;
 
 	i = -1;
-	while(++i < vars->width)
+	while(++i < vars->screen.max_x)
 	{
 		j = -1;
-		while (++j < vars->height)
+		while (++j < vars->screen.max_y)
 			my_mlx_pixel_put(vars, i, j, 0x00000000);
 	}
 }
 
-int mouse_hook(int button, int x, int y, t_vars *vars)
+int	mouse_hook(int button, int x, int y, t_vars *vars)
 {   
 	clean_img(vars);
 	printf("key: %i\n",button);
-	float dx;
-	float dy;
-	float middle_x;
-	float middle_y;
-
-	middle_x = vars->middle_point_x;
-	middle_y = vars->middle_point_y;
 	if (button == 4)
 	{
 		vars->size_grid += 1;
-		dx = x - vars->offset_x;
-		dy = y - vars->offset_y;
-		printf("dx%f, dy%f\n", dx, dy);
-		if (dx > 0 && dy > 0)
-		{
-			vars->offset_x += 5;
-			vars->offset_y += 5;
-		}
-		else if (dx < 0 && dy > 0)
-		{
-			vars->offset_x -= 5;
-			vars->offset_y += 5;
-		}
-		else if (dx > 0 && dy < 0)
-		{
-			vars->offset_x += 5;
-			vars->offset_y -= 5;
-		}
-		else
-		{
-			vars->offset_x -= 5;
-			vars->offset_y -= 5;
-		}
 	}
-
 	else if (button == 5)
 	{
-		if (vars->size_grid > 0)
+		if (vars->size_grid > 2)
 			vars->size_grid -= 1;
-		dx = x - vars->offset_x;
-		dy = y - vars->offset_y;
-		if (dx > 0 && dy > 0)
-		{
-			vars->offset_x -= 5;
-			vars->offset_y -= 5;
-		}
-		else if (dx < 0 && dy > 0)
-		{
-			vars->offset_x += 5;
-			vars->offset_y -= 5;
-		}
-		else if (dx > 0 && dy < 0)
-		{
-			vars->offset_x -= 5;
-			vars->offset_y += 5;
-		}
-		else
-		{
-			vars->offset_x += 5;
-			vars->offset_y += 5;
-		}
+		printf("si%f", vars->size_grid);
 	}
 	else if (button == 1)
 	{
 		vars->offset_x = x;
 		vars->offset_y = y;
 	}
-	draw_img_grid(vars);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
-	
+	draw_img_grid(vars);	
+	return 0;
 }
 
-int handle_offset(int keysym, t_vars *vars)
+void	handle_offset(int keysym, t_vars *vars)
 {
     if (keysym == 65363)
 		vars->offset_x += 10;
@@ -108,7 +56,7 @@ int handle_offset(int keysym, t_vars *vars)
 		vars->offset_y -= 10;
 }
 
-int handle_angles(int keysym, t_vars *vars)
+void	handle_angles(int keysym, t_vars *vars)
 {
 	if (keysym == 119)
 		vars->angle_y += 0.01;
@@ -120,19 +68,19 @@ int handle_angles(int keysym, t_vars *vars)
 		vars->angle_x -= 0.01;
 }
 
-int handle_reset(int keysym, t_vars *vars)
+void	handle_reset(t_vars *vars)
 {
     vars->size_grid = 15;
-    vars->offset_x = 400;
-    vars->offset_y = 400;
     vars->angle_y = 0.523599;
     vars->angle_x = 0.523599;
+	vars->offset_x = -vars->screen.min_x;
+	vars->offset_y = -vars->screen.min_y;
     vars->phi = 0;
     vars->qsi = 0;
     vars->theta = 0;
 }
 
-int handle_color(int keysym, t_vars *vars)
+void	handle_color(int keysym, t_vars *vars)
 {
     if (keysym == 49 && vars->flag < 6)
         vars->flag++;
@@ -140,12 +88,13 @@ int handle_color(int keysym, t_vars *vars)
         vars->flag--;
 }
 
-int handle_rotation(int keysym, t_vars *vars)
+//x->theta; y->phi; z->qsi;
+void	handle_rotation(int keysym, t_vars *vars)
 {
     if (keysym == 51)
-		vars->theta += 0.01;
-	else if (keysym == 52)
 		vars->theta -= 0.01;
+	else if (keysym == 52)
+		vars->theta += 0.01;
 	else if (keysym == 53)
 		vars->phi += 0.01;
 	else if (keysym == 54)
@@ -154,12 +103,48 @@ int handle_rotation(int keysym, t_vars *vars)
 		vars->qsi += 0.01;
 	else if (keysym == 56)
 		vars->qsi -= 0.01;
+	printf("%f", vars->qsi);
+}
+
+void	handle_z(int keysym, t_vars *vars)
+{
+	if (keysym == 122 && vars->z_modify < 20)
+		vars->z_modify += 0.1;
+	else if(keysym == 120 && vars->z_modify > 0.2)
+		vars->z_modify -= 0.1;
+	else if(keysym == 65507)
+		vars->z_modify = 10;
+	else if(keysym == 65505)
+		vars->z_modify = 1;
+}
+
+void	handle_projection(int keysym, t_vars *vars)
+{
+    if (keysym == 121 && vars->flag < 6)
+	{
+        vars->tranform_number++;
+		printf("nb: %i", vars->tranform_number);
+	}
+    else if (keysym == 117 && vars->flag > 1)
+        vars->tranform_number--;
 }
 
 int	handle_keypress(int keysym, t_vars *vars)
 {
-	printf("key: %i\n",keysym);
+	//printf("key: %i\n",keysym);
 	clean_img(vars);
+	if (keysym == 'm' && vars->map_number <= vars->max_maps )
+	{
+		//printf("%s\n", vars->map_file[vars->map_number]);
+		vars->map_number++;
+		vars->nb_cols = 0;
+		vars->nb_lines = 0;
+		//printf("%s\n", vars->map_file[vars->map_number]);
+		mlx_destroy_window(vars->mlx, vars->win);
+		mlx_destroy_image(vars->mlx, vars->img.img);
+		choose_map(vars);
+		return (0);
+	}
 	if (keysym == XK_Escape)
 		ft_close(0);
 	else if (keysym == 65363 || keysym == 65361 || keysym == 65364 || keysym == 65362)
@@ -167,14 +152,17 @@ int	handle_keypress(int keysym, t_vars *vars)
 	else if (keysym == 119 || keysym == 115 || keysym == 100 || keysym == 97)
         handle_angles(keysym, vars);
 	else if (keysym == 114)
-        handle_reset(keysym, vars);
+        handle_reset(vars);
 	else if (keysym == 49 || keysym == 50)
 		handle_color(keysym, vars);
+	else if (keysym == 122 || keysym == 120 || keysym == 65507 || keysym == 65505)
+		handle_z(keysym, vars);
+	else if (keysym == 121 || keysym == 117 || keysym == 105 || keysym == 111)
+		handle_projection(keysym, vars);
 	else if (keysym == 51 || keysym == 52 || keysym == 53 \
     || keysym == 54 || keysym == 55 || keysym == 56) 
 		vars->theta += 0.01;
         handle_rotation(keysym, vars);
 	draw_img_grid(vars);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
 	return (0);
 }

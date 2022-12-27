@@ -18,9 +18,13 @@ int make_color(float percent, int flag, int r, int g)
     else if (flag == 5)
         return (create_trgb(0, 0, r, g));
     else if (flag == 6)
-        return (create_trgb(0, g, 0, r));
+        return (create_trgb(0, g/3, r/0.5, r/1.25));
     return(0);
 }
+//return (create_trgb(0, g, 0, r));
+//return (create_trgb(0, g/1.5, r/0.5, r));
+//return (create_trgb(0, g/3, r/0.5, r));
+//return (create_trgb(0, g/4, r/0.6, r));
 
 //0    -> (0,     0,     0)
 //0.25 -> (255,   127.5, 0)

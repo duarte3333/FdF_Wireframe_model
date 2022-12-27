@@ -1,28 +1,19 @@
 #include "fdf.h"
 
-//Esta funcao irá guardar o maximo elemento z e o minimo nas vars
-void   ft_max_and_min(int nb, t_vars *vars)
-{
-    if (!vars->max_z || nb > vars->max_z)
-        vars->max_z = nb;
-    if (!vars->min_z || nb < vars->min_z)
-        vars->min_z = nb;
-}
 //Faco ft_split() da line que recebo
 //Conto o size, para saber numero de cols e fazer o malloc()
 //Depois, transformo cada elemento do output
 //do ft_split() em inteiro usando o ft_atoi()
 //Output por exemplo sera: map[i] = {1, 0, 0, 0}
-int    *split_array(t_vars *vars, char *line)
+int *split_array(t_vars *vars, char *line)
 {
-    int *t;
-    char **temp;
-    int size;
-    int i;
+    int     *t;
+    char    **temp;
+    int     size;
+    int     i;
 
     size = 0;
     i = 0;
-    
     temp = ft_split(line, ' ');
     while (temp[size])
         size++;
@@ -32,7 +23,7 @@ int    *split_array(t_vars *vars, char *line)
     while (i < size)
     {
         t[i] = ft_atoi(temp[i]);
-        ft_max_and_min(t[i], vars);
+        //ft_max_and_min(t[i], vars);
         free(temp[i]);
         i++;
     }
@@ -49,8 +40,8 @@ int    *split_array(t_vars *vars, char *line)
 //Output por exemplo sera: map = {{1,0,0,0}, {1,0,1,0}, {0,0,0,0}}
 void    map_loading(t_vars *vars, int fd, int index)
 {
-    char *line;
-    
+    char    *line;
+
     line = get_next_line(fd);
     vars->nb_lines++;
     if (line)
@@ -62,7 +53,7 @@ void    map_loading(t_vars *vars, int fd, int index)
         vars->map[index] = split_array(vars, line);
     }
     else
-        vars->map[index] = line;
+        vars->map[index] = (int *)line;
     free(line);
 }
 
