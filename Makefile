@@ -10,7 +10,11 @@ SRCS = main.c \
 	  draw_grid.c \
 	  color.c \
 	  keys_managment.c \
-	  transformations.c 
+	  transformations.c \
+	  menu.c \
+	  screen.c \
+	  map_to_point.c \
+	  rotations.c
 
 OBJS	= ${SRCS:.c=.o}
 

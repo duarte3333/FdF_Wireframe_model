@@ -5,30 +5,29 @@
 //Depois, transformo cada elemento do output
 //do ft_split() em inteiro usando o ft_atoi()
 //Output por exemplo sera: map[i] = {1, 0, 0, 0}
-int *split_array(t_vars *vars, char *line)
+int	*split_array(t_vars *vars, char *line)
 {
-    int     *t;
-    char    **temp;
-    int     size;
-    int     i;
+	int		*t;
+	char	**temp;
+	int		size;
+	int		i;
 
-    size = 0;
-    i = 0;
-    temp = ft_split(line, ' ');
-    while (temp[size])
-        size++;
-    vars->nb_cols = size;
-    t = malloc(sizeof(int) * size);
-    
-    while (i < size)
-    {
-        t[i] = ft_atoi(temp[i]);
-        //ft_max_and_min(t[i], vars);
-        free(temp[i]);
-        i++;
-    }
-    free(temp);
-    return(t);
+	size = 0;
+	i = 0;
+	temp = ft_split(line, ' ');
+	while (temp[size])
+		size++;
+	vars->nb_cols = size;
+	t = malloc(sizeof(int) * size);
+
+	while (i < size)
+	{
+		t[i] = ft_atoi(temp[i]);
+		free(temp[i]);
+		i++;
+	}
+	free(temp);
+	return (t);
 }
 
 //Esta funcao vai recursivamente contar o numero de linhas do ficheiro .txt,
@@ -38,23 +37,23 @@ int *split_array(t_vars *vars, char *line)
 //vai fazer ft_split() e transformar o output disso em numero
 //Quando chegar ao final do ficheiro, o ultimo elemento do map será NULL
 //Output por exemplo sera: map = {{1,0,0,0}, {1,0,1,0}, {0,0,0,0}}
-void    map_loading(t_vars *vars, int fd, int index)
+void	map_loading(t_vars *vars, int fd, int index)
 {
-    char    *line;
+	char	*line;
 
-    line = get_next_line(fd);
-    vars->nb_lines++;
-    if (line)
-        map_loading(vars, fd, index + 1);
-    else
-        vars->map = malloc(sizeof(int *) * vars->nb_lines);
-    if (line)
-    {
-        vars->map[index] = split_array(vars, line);
-    }
-    else
-        vars->map[index] = (int *)line;
-    free(line);
+	line = get_next_line(fd);
+	vars->nb_lines++;
+	if (line)
+		map_loading(vars, fd, index + 1);
+	else
+		vars->map = malloc(sizeof(int *) * vars->nb_lines);
+	if (line)
+	{
+		vars->map[index] = split_array(vars, line);
+	}
+	else
+		vars->map[index] = (int *)line;
+	free(line);
 }
 
 

@@ -110,5 +110,7 @@ void	clean_img(t_vars *vars);
 void 	choose_map(t_vars *vars);
 int 	mouse_hook(int button, int x, int y, t_vars *vars);
 int		handle_keypress(int keysym, t_vars *vars);
+void	ft_menu(t_vars *vars);
+void	screen_size(t_vars *vars);
 
 #endif
