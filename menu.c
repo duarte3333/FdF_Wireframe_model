@@ -21,6 +21,8 @@ void	ft_part_one(t_vars *vars)
 		"SHIFT - z factor = 1:1");
 	mlx_string_put(vars->mlx, vars->win, 100, 275, 0xAFA9A9, \
 		"CTRL - z factor = 1:10");
+	mlx_string_put(vars->mlx, vars->win, 100, 300, 0xAFA9A9, \
+		"TAB - z factor = 1:100");
 }
 
 void	ft_menu(t_vars *vars)
@@ -28,23 +30,29 @@ void	ft_menu(t_vars *vars)
 	if (vars->map_option == 1)
 	{
 		ft_part_one(vars);
-		mlx_string_put(vars->mlx, vars->win, 100, 300, 0xAFA9A9, \
-		"w and s - rotation parallel x");
 		mlx_string_put(vars->mlx, vars->win, 100, 325, 0xAFA9A9, \
-		"a and d - rotation parallel y");
+		"w and s - rotation parallel x");
 		mlx_string_put(vars->mlx, vars->win, 100, 350, 0xAFA9A9, \
-		"3 and 4 - rotation x");
+		"a and d - rotation parallel y");
 		mlx_string_put(vars->mlx, vars->win, 100, 375, 0xAFA9A9, \
-		"5 and 6 - rotation y");
+		"3 and 4 - rotation x");
 		mlx_string_put(vars->mlx, vars->win, 100, 400, 0xAFA9A9, \
-		"7 and 8 - rotation z");
+		"5 and 6 - rotation y");
 		mlx_string_put(vars->mlx, vars->win, 100, 425, 0xAFA9A9, \
+		"7 and 8 - rotation z");
+		mlx_string_put(vars->mlx, vars->win, 100, 450, 0xAFA9A9, \
 		"m - change map");
 		mlx_string_put(vars->mlx, vars->win, 100, \
-			450, 0xAFA9A9, "r - reset map");
+			475, 0xAFA9A9, "r - reset map");
 		mlx_string_put(vars->mlx, vars->win, 100, \
-			475, 0xAFA9A9, "mouse click - grid location");
+			500, 0xAFA9A9, "mouse click - grid location");
 		mlx_string_put(vars->mlx, vars->win, 100, \
-			500, 0xAFA9A9, "y and u - change projection");
+			525, 0xAFA9A9, "y and u - change projection");
+		mlx_string_put(vars->mlx, vars->win, 100, \
+			550, 0xAFA9A9, "i - offset change = 1");
+		mlx_string_put(vars->mlx, vars->win, 100, \
+			575, 0xAFA9A9, "o - offset change++");
+		mlx_string_put(vars->mlx, vars->win, 100, \
+			600, 0xAFA9A9, "p - offset change--");
 	}
 }

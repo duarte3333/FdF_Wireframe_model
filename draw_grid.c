@@ -10,74 +10,63 @@ t_point	transformations(t_vars *vars, t_point a)
 		a = isometric_projection(a, vars);
 	if (vars->tranform_number == 2)
 		a = front_view(a, vars);
-	if (vars->tranform_number == 3)
-		a = parallel_projection(a, vars);
 	return (a);
 }
 
-
-void  two_points(t_vars *vars, t_point a, t_point b)
+void	edge_case(t_vars *vars, t_point a, t_point b, float range, float x)
 {
-	float	slope;
-	float	z_rgb;
-	float	range;
-	float	direction;
+	int	y;
+
+	y = a.y;
+	while (fabs(b.y - y) > 0.5)
+	{
+		vars->rgb_p = vars->rgb_p + range / ((vars->size_grid));
+		my_mlx_pixel_put(vars, x, y, percent_to_color(vars->rgb_p, \
+			vars->flag));
+		y += ((b.y - a.y) / (fabs(b.y - a.y)));
+	}
+	return ;
+
+}
+
+void	inicializer(t_vars *vars, t_point a, t_point b, float x)
+{
+	vars->rgb_p = a.z / vars->new_max;
+	if (b.z - a.z > 0)
+		vars->range_z = (b.z / vars->new_max - vars->rgb_p);
+	else
+		vars->range_z = -(a.z / vars->new_max - b.z / vars->new_max);
+	if (fabs(b.x - a.x) < 0.5)
+		edge_case(vars, a, b, vars->range_z, x);
+	vars->slope = (b.y - a.y) / (b.x - a.x);
+	vars->direction = (b.x - a.x) / (fabs(b.x - a.x));
+}
+
+void	two_points(t_vars *vars, t_point a, t_point b)
+{
 	float	x;
 	float	y;
-	float	range_y;
 
 	a = transformations(vars, a);
 	b = transformations(vars, b);
-
 	x = a.x;
-	z_rgb = a.z / vars->new_max;
-	if (b.z - a.z > 0)
-		range = (b.z / vars->new_max - z_rgb);
-	else
-		range = -(a.z / vars->new_max - b.z / vars->new_max);
-	if (fabs(b.x - a.x) >= 0 && fabs(b.x - a.x) <= 0.01)
-	{
-		y = a.y;
-		while (fabs(b.y - y) > 0.5)
-		{
-			z_rgb = z_rgb + range/((vars->size_grid));
-			my_mlx_pixel_put(vars, x, y, percent_to_color(z_rgb, vars->flag));
-			y += ((b.y - a.y)/(fabs(b.y - a.y)));
-		}
-	}
-	if (fabs(b.y - a.y) >= 0 && fabs(b.y - a.y) <= 0.01)
-	{
-		while (fabs(b.x - x) > 0.5)
-		{
-			y = a.y;
-			z_rgb = z_rgb + range/((vars->size_grid));
-			my_mlx_pixel_put(vars, x, y, percent_to_color(z_rgb, vars->flag));
-			x += ((b.x - a.x)/(fabs(b.x - a.x)));
-		}
-	}
-	slope = (b.y - a.y) / (b.x - a.x);
-	direction = (int)(b.x - a.x) / (fabs(b.x - a.x));
-	y = slope * (x - a.x) + a.y;
-
+	inicializer(vars, a, b, x);
 	while (fabs(b.x - x) > 0.5)
 	{
-		y = slope * (x - a.x) + a.y;
-		z_rgb = z_rgb + range / ((vars->size_grid));
-		my_mlx_pixel_put(vars, x, y, percent_to_color(z_rgb, vars->flag));
-		range_y = fabs(y - (slope * ((x + direction) - a.x) + a.y));
-		if (range_y > 1)
+		y = vars->slope * (x - a.x) + a.y;
+		vars->rgb_p = vars->rgb_p + vars->range_z / ((vars->size_grid));
+		my_mlx_pixel_put(vars, x, y, percent_to_color(vars->rgb_p, vars->flag));
+		if ((fabs(y - (vars->slope * ((x + vars->direction) - a.x) + a.y))) > 1)
 		{
-			while ((int)(y - (slope * ((x + direction) - a.x) + a.y)))
-			{
-				if ((b.x - a.x) == 0)
-					y += 1;
-				else
-					y += ((b.y - a.y) / (fabs(b.y - a.y)));
+			while ((int)(y - (vars->slope * \
+				((x + vars->direction) - a.x) + a.y)))
+			{	
+				y += ((b.y - a.y) / (fabs(b.y - a.y)));
 				my_mlx_pixel_put(vars, x, y, \
-				percent_to_color(z_rgb, vars->flag));
+				percent_to_color(vars->rgb_p, vars->flag));
 			}
 		}
-		x += direction;
+		x += vars->direction;
 	}
 }
 

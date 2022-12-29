@@ -8,10 +8,9 @@ void	ft_set_variables(t_vars *vars)
 	vars->phi = 0;
 	vars->qsi = 0;
 	vars->flag = 4;
-	vars->size_grid = 15;
+	vars->size_grid = 10;
 	vars->angle_y = 0.523599;
 	vars->angle_x = 0.523599;
-	vars->angle = 0.523599;
 	vars->z_modify = 1;
 	vars->screen.max_x = 0;
 	vars->screen.min_x = 0;
@@ -27,20 +26,11 @@ void	choose_map(t_vars *vars)
 	int	fd;
 
 	fd = open(vars->map_file[vars->map_number], O_RDONLY);
-	map_loading(vars, fd, 0);
 	ft_set_variables(vars);
+	map_loading(vars, fd, 0);
 	map_to_point(vars);
 	screen_size(vars);
 
-	if (vars->map_option == 1)
-	{
-		vars->offset_x = WINDOW_WIDTH / 2 \
-			- vars->screen.max_x / 2 - vars->screen.min_x;
-		vars->offset_y = WINDOW_HEIGHT / 2 \
-			- vars->screen.max_y / 2 - vars->screen.min_y;
-		vars->screen.max_x = WINDOW_WIDTH;
-		vars->screen.max_y = WINDOW_HEIGHT;
-	}
 	vars->img.img = \
 		mlx_new_image(vars->mlx, vars->screen.max_x, vars->screen.max_y);
 	vars->img.addr = mlx_get_data_addr(vars->img.img, \
@@ -66,7 +56,7 @@ int	main(int ac, char **av)
 		vars.map_option = 1;
 	while (av[vars.max_maps] != NULL)
 		vars.max_maps++;
-	vars.max_maps -= 2;
+	vars.max_maps -= 1;
 	printf("%i\n", vars.max_maps);
 	vars.map_file = av;
 	choose_map(&vars);
@@ -74,9 +64,18 @@ int	main(int ac, char **av)
 }
 
 
+
+
+
+
+
+
+
+//fazer check map
 //proteger ac av
-//norminette
-//mudança mapa em tempo real
+//ponto 0,0 ser centro
+//melhorar criação de janelas e centro
+//saber pq na proj 2 dá size grid = 1 e na proj 1 nao da
 //rotação perfeita
 //adicionar projeções extras
 //github prepare

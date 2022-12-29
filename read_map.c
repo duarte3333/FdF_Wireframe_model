@@ -1,5 +1,16 @@
 #include "fdf.h"
 
+//Esta funcao irá guardar o maximo elemento z e o minimo nas vars
+void	ft_max_and_min(int nb, t_vars *vars)
+{	
+	if (!vars->max_z || nb > vars->max_z)
+	{
+		vars->max_z = nb;
+	}
+	if (!vars->min_z || nb < vars->min_z)
+		vars->min_z = nb;
+}
+
 //Faco ft_split() da line que recebo
 //Conto o size, para saber numero de cols e fazer o malloc()
 //Depois, transformo cada elemento do output
@@ -23,6 +34,7 @@ int	*split_array(t_vars *vars, char *line)
 	while (i < size)
 	{
 		t[i] = ft_atoi(temp[i]);
+		ft_max_and_min(t[i], vars);
 		free(temp[i]);
 		i++;
 	}
