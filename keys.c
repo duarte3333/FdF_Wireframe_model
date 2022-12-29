@@ -6,6 +6,8 @@ void	handle_parte_one(int keysym, t_vars *vars)
 		change_map(vars, 1);
 	else if (keysym == 'n' && vars->map_number > 2)
 		change_map(vars, -1);
+	else if (keysym == 'r')
+		change_map(vars, 0);
 	else if (keysym == XK_Escape)
 		ft_close(0);
 	else if (keysym == 65363 || keysym == 65361 \
@@ -13,8 +15,6 @@ void	handle_parte_one(int keysym, t_vars *vars)
 		handle_offset(keysym, vars);
 	else if (keysym == 119 || keysym == 115 || keysym == 100 || keysym == 97)
 		handle_angles(keysym, vars);
-	else if (keysym == 114)
-		handle_reset(vars);
 }
 
 //printf("%s\n", vars->map_file[vars->map_number]);

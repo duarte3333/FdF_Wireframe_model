@@ -95,26 +95,3 @@ void	draw_img_grid(t_vars *vars)
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
 	ft_menu(vars);
 }
-
-// void	edge_cases(t_vars *vars, t_point a, t_point b)
-// {
-	// if (fabs(b.x - a.x) >= 0 && fabs(b.x - a.x) <= 0.01)
-	// {
-	// 	y = a.y;
-	// 	while (fabs(b.y - y) > 0.5)
-	// 	{
-	// 		z_rgb = z_rgb + range/((vars->size_grid));
-	// 		my_mlx_pixel_put(vars, x, y, percent_to_color(z_rgb, vars->flag));
-	// 		y += ((b.y - a.y)/(fabs(b.y - a.y)));
-	// 	}
-	// }
-	// if (fabs(b.y - a.y) >= 0 && fabs(b.y - a.y) <= 0.01)
-	// {
-	// 	while (fabs(b.x - x) > 0.5)
-	// 	{
-	// 		y = a.y;
-	// 		z_rgb = z_rgb + range/((vars->size_grid));
-	// 		my_mlx_pixel_put(vars, x, y, percent_to_color(z_rgb, vars->flag));
-	// 		x += ((b.x - a.x)/(fabs(b.x - a.x)));
-	// 	}
-	// }

@@ -24,23 +24,11 @@ void	handle_angles(int keysym, t_vars *vars)
 		vars->angle_x -= 0.01;
 }
 
-void	handle_reset(t_vars *vars)
-{
-	vars->size_grid = 10;
-	vars->angle_y = 0.523599;
-	vars->angle_x = 0.523599;
-	vars->offset_x = -vars->screen.min_x;
-	vars->offset_y = -vars->screen.min_y;
-	vars->phi = 0;
-	vars->qsi = 0;
-	vars->theta = 0;
-}
-
 void	handle_color(int keysym, t_vars *vars)
 {
 	if (keysym == 49 && vars->flag < 9)
 		vars->flag++;
-	else if (keysym == 50 && vars->flag > 1)
+	else if (keysym == 50 && vars->flag > 0)
 		vars->flag--;
 }
 

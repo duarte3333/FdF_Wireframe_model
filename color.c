@@ -19,7 +19,9 @@ int	create_trgb(int t, int r, int g, int b)
 
 int	make_color(float percent, int flag, int r, int g)
 {
-	if (flag == 1)
+	if (flag == 0)
+		return (create_trgb(0, 255, 255, 255));
+	else if (flag == 1)
 		return (create_trgb(0, percent * 255, 0, 0));
 	else if (flag == 2)
 		return (create_trgb(0, 0, percent * 255, 0));
@@ -54,9 +56,9 @@ int	percent_to_color(float percent, int flag)
 	int	r;
 	int	g;
 
-    r = 255;
-    g = 255;
-	if (flag >= 4 && flag <= 9) 
+	r = 255;
+	g = 255;
+	if (flag >= 4 && flag <= 9)
 	{
 		if (percent < 0 || percent > 1)
 			return (0);
