@@ -10,13 +10,19 @@ t_point	transformations(t_vars *vars, t_point a)
 		a = isometric_projection(a, vars);
 	if (vars->tranform_number == 2)
 		a = front_view(a, vars);
+	if (vars->tranform_number == 3)
+		a = right_view(a, vars);
+	if (vars->tranform_number == 4)
+		a = bottom_view(a, vars);
 	return (a);
 }
 
 void	edge_case(t_vars *vars, t_point a, t_point b, float range, float x)
 {
 	int	y;
+	int	flag;
 
+	flag = 0;
 	y = a.y;
 	while (fabs(b.y - y) > 0.5)
 	{
@@ -24,6 +30,7 @@ void	edge_case(t_vars *vars, t_point a, t_point b, float range, float x)
 		my_mlx_pixel_put(vars, x, y, percent_to_color(vars->rgb_p, \
 			vars->flag));
 		y += ((b.y - a.y) / (fabs(b.y - a.y)));
+		flag++;
 	}
 	return ;
 
@@ -36,7 +43,7 @@ void	inicializer(t_vars *vars, t_point a, t_point b, float x)
 		vars->range_z = (b.z / vars->new_max - vars->rgb_p);
 	else
 		vars->range_z = -(a.z / vars->new_max - b.z / vars->new_max);
-	if (fabs(b.x - a.x) < 0.5)
+	if (fabs(b.x - a.x) <= 0.5 && fabs(b.y - a.y) > 0.5)
 		edge_case(vars, a, b, vars->range_z, x);
 	vars->slope = (b.y - a.y) / (b.x - a.x);
 	vars->direction = (b.x - a.x) / (fabs(b.x - a.x));

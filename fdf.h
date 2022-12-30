@@ -122,4 +122,6 @@ void	handle_z(int keysym, t_vars *vars);
 void	handle_projection(int keysym, t_vars *vars);
 void	free_map(t_vars *vars);
 int		change_map(t_vars *vars, int i);
+t_point	right_view(t_point a, t_vars *vars);
+t_point	bottom_view(t_point a, t_vars *vars);
 #endif

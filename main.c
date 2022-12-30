@@ -73,10 +73,6 @@ int	main(int ac, char **av)
 
 //fazer check map
 //proteger ac av
-//ponto 0,0 ser centro
-//melhorar criação de janelas e centro
-//saber pq na proj 2 dá size grid = 1 e na proj 1 nao da
-//rotação perfeita
 //adicionar projeções extras
 //github prepare
 

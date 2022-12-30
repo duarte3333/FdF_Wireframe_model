@@ -16,7 +16,7 @@ void	handle_z(int keysym, t_vars *vars)
 
 void	handle_projection(int keysym, t_vars *vars)
 {
-	if (keysym == 121 && vars->tranform_number < 2)
+	if (keysym == 121 && vars->tranform_number < 4)
 		vars->tranform_number++;
 	else if (keysym == 117 && vars->tranform_number > 1)
 		vars->tranform_number--;

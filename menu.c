@@ -14,14 +14,12 @@ void	ft_part_one(t_vars *vars)
 	mlx_string_put(vars->mlx, vars->win, 100, 175, 0xAFA9A9, \
 	"2 - change color backwards");
 	mlx_string_put(vars->mlx, vars->win, 100, 200, 0xAFA9A9, \
-	"z - decrease z");
+	"z and x - decrease/increase z");
 	mlx_string_put(vars->mlx, vars->win, 100, 225, 0xAFA9A9, \
-		"x - increase z");
-	mlx_string_put(vars->mlx, vars->win, 100, 250, 0xAFA9A9, \
 		"SHIFT - z factor = 1:1");
-	mlx_string_put(vars->mlx, vars->win, 100, 275, 0xAFA9A9, \
+	mlx_string_put(vars->mlx, vars->win, 100, 250, 0xAFA9A9, \
 		"CTRL - z factor = 1:10");
-	mlx_string_put(vars->mlx, vars->win, 100, 300, 0xAFA9A9, \
+	mlx_string_put(vars->mlx, vars->win, 100, 275, 0xAFA9A9, \
 		"TAB - z factor = 1:100");
 }
 
@@ -30,29 +28,31 @@ void	ft_menu(t_vars *vars)
 	if (vars->map_option == 1)
 	{
 		ft_part_one(vars);
-		mlx_string_put(vars->mlx, vars->win, 100, 325, 0xAFA9A9, \
+		mlx_string_put(vars->mlx, vars->win, 100, 300, 0xAFA9A9, \
 		"w and s - rotation parallel x");
+		mlx_string_put(vars->mlx, vars->win, 100, 325, 0xAFA9A9, \
+		"a and d - rotation z");
 		mlx_string_put(vars->mlx, vars->win, 100, 350, 0xAFA9A9, \
-		"a and d - rotation parallel y");
+		"i and k - rotation x");
 		mlx_string_put(vars->mlx, vars->win, 100, 375, 0xAFA9A9, \
-		"3 and 4 - rotation x");
+		"j and l - rotation y");
 		mlx_string_put(vars->mlx, vars->win, 100, 400, 0xAFA9A9, \
-		"5 and 6 - rotation y");
-		mlx_string_put(vars->mlx, vars->win, 100, 425, 0xAFA9A9, \
-		"7 and 8 - rotation z");
-		mlx_string_put(vars->mlx, vars->win, 100, 450, 0xAFA9A9, \
+		"7 and 8 - rotation parallel y");
+		mlx_string_put(vars->mlx, vars->win, 100, \
+			425, 0xAFA9A9, "mouse click - grid location");
+		mlx_string_put(vars->mlx, vars->win, 100, \
+			450, 0xAFA9A9, "y and u - change projection");
+		mlx_string_put(vars->mlx, vars->win, 100, 475, 0xAFA9A9, \
+		"9 and 0 - menu change");
+		mlx_string_put(vars->mlx, vars->win, 100, 500, 0xAFA9A9, \
 		"m - change map");
 		mlx_string_put(vars->mlx, vars->win, 100, \
-			475, 0xAFA9A9, "r - reset map");
+			525, 0xAFA9A9, "r - reset map");
+		mlx_string_put(vars->mlx, vars->win, WINDOW_WIDTH - 100, \
+			20, 0xAFA9A9, "MAP NAME");
+		mlx_string_put(vars->mlx, vars->win, WINDOW_WIDTH - 100, \
+			40, 0xAFA9A9, vars->map_file[vars->map_number]);
 		mlx_string_put(vars->mlx, vars->win, 100, \
-			500, 0xAFA9A9, "mouse click - grid location");
-		mlx_string_put(vars->mlx, vars->win, 100, \
-			525, 0xAFA9A9, "y and u - change projection");
-		mlx_string_put(vars->mlx, vars->win, 100, \
-			550, 0xAFA9A9, "i - offset change = 1");
-		mlx_string_put(vars->mlx, vars->win, 100, \
-			575, 0xAFA9A9, "o - offset change++");
-		mlx_string_put(vars->mlx, vars->win, 100, \
-			600, 0xAFA9A9, "p - offset change--");
+			WINDOW_HEIGHT - 100, 0xAFA9A9, "By: Duarte Morais");
 	}
 }

@@ -9,10 +9,7 @@ void	screen_dimensions(t_point a, t_vars *vars)
 		vars->z_modify = 10;
 	if (vars->max_z - vars->min_z > 900)
 		vars->z_modify = 100;
-	if (vars->tranform_number == 1)
-		a = isometric_projection(a, vars);
-	else if (vars->tranform_number == 2)
-		a = front_view(a, vars);
+	a = isometric_projection(a, vars);
 	x = a.x;
 	y = a.y;
 	if (x < vars->screen.min_x && x < 0)

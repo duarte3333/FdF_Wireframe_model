@@ -24,16 +24,14 @@ void	clean_img(t_vars *vars)
 int	mouse_hook(int button, int x, int y, t_vars *vars)
 {
 	clean_img(vars);
-	printf("key: %i\n",button);
 	if (button == 4)
 	{
 		vars->size_grid += 1;
 	}
 	else if (button == 5)
 	{
-		if (vars->size_grid > 2)
+		if (vars->size_grid > 1)
 			vars->size_grid -= 1;
-		printf("si%f", vars->size_grid);
 	}
 	else if (button == 1)
 	{

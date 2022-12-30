@@ -60,8 +60,6 @@ int	percent_to_color(float percent, int flag)
 	g = 255;
 	if (flag >= 4 && flag <= 9)
 	{
-		if (percent < 0 || percent > 1)
-			return (0);
 		if (percent < 0.5)
 			g = (255 * percent / 0.5);
 		else

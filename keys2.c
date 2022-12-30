@@ -3,25 +3,25 @@
 void	handle_offset(int keysym, t_vars *vars)
 {
 	if (keysym == 65363)
-		vars->offset_x += 30;
+		vars->offset_x += 50;
 	else if (keysym == 65361)
-		vars->offset_x -= 30;
+		vars->offset_x -= 50;
 	else if (keysym == 65364)
-		vars->offset_y += 30;
+		vars->offset_y += 50;
 	else if (keysym == 65362)
-		vars->offset_y -= 30;
+		vars->offset_y -= 50;
 }
 
 void	handle_angles(int keysym, t_vars *vars)
 {
-	if (keysym == 119)
-		vars->angle_y += 0.01;
-	else if (keysym == 115)
-		vars->angle_y -= 0.01;
-	else if (keysym == 100)
-		vars->angle_x += 0.01;
-	else if (keysym == 97)
-		vars->angle_x -= 0.01;
+	if (keysym == 'w')
+		vars->angle_y += 0.03;
+	else if (keysym == 's')
+		vars->angle_y -= 0.03;
+	else if (keysym == '7')
+		vars->angle_x += 0.03;
+	else if (keysym == '8')
+		vars->angle_x -= 0.03;
 }
 
 void	handle_color(int keysym, t_vars *vars)
@@ -35,16 +35,16 @@ void	handle_color(int keysym, t_vars *vars)
 //x->theta; y->phi; z->qsi;
 void	handle_rotation(int keysym, t_vars *vars)
 {
-	if (keysym == 51)
-		vars->theta -= 0.03;
-	else if (keysym == 52)
+	if (keysym == 'i')
 		vars->theta += 0.03;
-	else if (keysym == 53)
+	else if (keysym == 'k')
+		vars->theta -= 0.03;
+	else if (keysym == 'j')
 		vars->phi += 0.03;
-	else if (keysym == 54)
+	else if (keysym == 'l')
 		vars->phi -= 0.03;
-	else if (keysym == 55)
+	else if (keysym == 'a')
 		vars->qsi += 0.03;
-	else if (keysym == 56)
+	else if (keysym == 'd')
 		vars->qsi -= 0.03;
 }

@@ -10,7 +10,8 @@ void	bigger_case(t_vars *vars)
 		vars->offset_x = abs(vars->offset_x / 2);
 		vars->offset_y = abs(vars->offset_y / 2);
 		vars->size_grid /= 2;
-		if (vars->size_grid < 2)
+		printf("size%f\n",vars->size_grid);
+		if (vars->size_grid < 1)
 		{
 			if (vars->screen.max_y > 1200)
 				vars->screen.max_y = 1200;
