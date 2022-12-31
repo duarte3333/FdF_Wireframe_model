@@ -87,20 +87,24 @@ typedef struct s_vars {
 	float		range_z;
 	float		slope;
 	int			direction;
+	float		angle_p;
 }				t_vars;
 
 
 char	*get_next_line(int fd);
 void	map_loading(t_vars *vars, int fd, int index);
 void	ft_max_and_min(int nb, t_vars *vars);
+void	ft_set_variables(t_vars *vars);
 t_point	init_point(int x, int y, int z);
 t_point	rotation_z(t_point a, t_vars *vars);
 t_point	rotation_y(t_point a, t_vars *vars);
 t_point	rotation_x(t_point a, t_vars *vars);
 t_point	isometric_projection(t_point a, t_vars *vars);
-t_point	front_view(t_point a, t_vars *vars);
+t_point	top_view(t_point a, t_vars *vars);
+t_point	right_view(t_point a, t_vars *vars);
+t_point	bottom_view(t_point a, t_vars *vars);
+t_point	parallel_projection(t_point a, t_vars *vars);
 t_point	transformations(t_vars *vars, t_point a);
-//t_point	parallel_projection(t_point a, t_vars *vars);
 void	map_to_point(t_vars *vars);
 void	draw_img_grid(t_vars *vars);
 int		percent_to_color(float percent, int flag);
@@ -122,6 +126,6 @@ void	handle_z(int keysym, t_vars *vars);
 void	handle_projection(int keysym, t_vars *vars);
 void	free_map(t_vars *vars);
 int		change_map(t_vars *vars, int i);
-t_point	right_view(t_point a, t_vars *vars);
-t_point	bottom_view(t_point a, t_vars *vars);
+void	free_map(t_vars *vars);
+
 #endif

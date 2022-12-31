@@ -1,5 +1,19 @@
 #include "fdf.h"
 
+
+void	handle_projection(int keysym, t_vars *vars)
+{
+	if (keysym == 121 && vars->tranform_number < 5)
+		vars->tranform_number++;
+	else if (keysym == 117 && vars->tranform_number > 1)
+		vars->tranform_number--;
+	else if (keysym == '3')
+	{
+		vars->map_option = vars->map_option == 0;
+		change_map(vars, 0);
+	}
+}
+
 void	handle_z(int keysym, t_vars *vars)
 {
 	if (keysym == 122 && vars->z_modify < 20)
@@ -14,28 +28,20 @@ void	handle_z(int keysym, t_vars *vars)
 		vars->z_modify = 1;
 }
 
-void	handle_projection(int keysym, t_vars *vars)
-{
-	if (keysym == 121 && vars->tranform_number < 4)
-		vars->tranform_number++;
-	else if (keysym == 117 && vars->tranform_number > 1)
-		vars->tranform_number--;
-}
-
 void	free_map(t_vars *vars)
 {
 	int	i;
 
-	mlx_destroy_window(vars->mlx, vars->win);
-	mlx_destroy_image(vars->mlx, vars->img.img);
 	i = -1;
-	while (vars->map[++i])
+	while (vars->map && vars->map[++i])
 	{
 		free(vars->map[i]);
 		free(vars->point_map[i]);
 	}
 	free(vars->map);
 	free(vars->point_map);
+	vars->map = NULL;
+	vars->point_map = NULL;
 }
 
 int	change_map(t_vars *vars, int i)

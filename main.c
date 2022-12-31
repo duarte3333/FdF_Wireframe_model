@@ -11,6 +11,7 @@ void	ft_set_variables(t_vars *vars)
 	vars->size_grid = 10;
 	vars->angle_y = 0.523599;
 	vars->angle_x = 0.523599;
+	vars->angle_p = 0.7854;
 	vars->z_modify = 1;
 	vars->screen.max_x = 0;
 	vars->screen.min_x = 0;
@@ -21,16 +22,94 @@ void	ft_set_variables(t_vars *vars)
 	vars->tranform_number = 1;
 }
 
+int	strcmp_fdf(char *a)
+{
+	int		i;
+	int		j;
+	char	*b;
+
+	b = ".fdf";
+	i = 0;
+	j = -1;
+	while (a[i] != 0)
+		i++;
+	i -= 5;
+	while (a[++i] != 0)
+	{
+		if (a[i] != b[++j])
+			return (0);
+	}
+	return (1);
+}
+
+int	check_map_digits(int fd)
+{
+	int		i;
+	int		size;
+	char	*line;
+
+	i = 0;
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		line = get_next_line(fd);
+		while (line[i] != '\0')
+		{
+			if (line[i] == '\n')
+				break ;
+			printf("%c\n", line[i]);
+			if (!ft_isdigit(line[i]) && line[i] != '\t' \
+			&& line[i] != '\n' && line[i] != ' ')
+			{
+				write (1, "Detected a non-digit\n", 22);
+				return (0);
+			}
+			i++;
+		}
+	}
+	return (1);
+}
+
+int	check_map(t_vars *vars)
+{
+	int	fd;
+
+	if (!strcmp_fdf(vars->map_file[vars->map_number]))
+	{
+		write(1, "That file is not a .fdf file\n", 30);
+		ft_close (vars);
+	}
+	else
+	{
+		fd = open(vars->map_file[vars->map_number], O_RDONLY);
+		if (fd == -1)
+		{
+			write(1, "That file is not in the repository.\n", 37);
+			ft_close (vars);
+		}
+		// if (check_map_digits(fd))
+		// {
+		// 	write(1, "That file has non-digits, please change that.\n", 47);
+		// 	ft_close (vars);
+		// }
+	}
+	return (fd);
+}
+
+//Cria uma janela, uma imagem e desenha para um dado mapa
 void	choose_map(t_vars *vars)
 {
 	int	fd;
 
-	fd = open(vars->map_file[vars->map_number], O_RDONLY);
+	fd = check_map(vars);
 	ft_set_variables(vars);
 	map_loading(vars, fd, 0);
 	map_to_point(vars);
 	screen_size(vars);
-
+	if (vars->win)
+		mlx_destroy_window(vars->mlx, vars->win);
+	if (vars->img.img)
+		mlx_destroy_image(vars->mlx, vars->img.img);
 	vars->img.img = \
 		mlx_new_image(vars->mlx, vars->screen.max_x, vars->screen.max_y);
 	vars->img.addr = mlx_get_data_addr(vars->img.img, \
@@ -38,7 +117,7 @@ void	choose_map(t_vars *vars)
 	vars->win = mlx_new_window(vars->mlx, \
 		vars->screen.max_x, vars->screen.max_y, "FdF - Duarte");
 	mlx_hook(vars->win, 2, 1L << 0, handle_keypress, vars);
-	mlx_hook(vars->win, 17, 0, ft_close, 0);
+	mlx_hook(vars->win, 17, 0, ft_close, vars);
 	mlx_hook(vars->win, 4, 1L << 2, mouse_hook, vars);
 	draw_img_grid(vars);
 }
@@ -50,14 +129,11 @@ int	main(int ac, char **av)
 
 	(void) ac;
 	vars.mlx = mlx_init();
-	vars.map_number = 2;
+	vars.map_number = 1;
 	vars.max_maps = 0;
-	if (av[1][0] == '1')
-		vars.map_option = 1;
+	vars.map_option = 0;
 	while (av[vars.max_maps] != NULL)
 		vars.max_maps++;
-	vars.max_maps -= 1;
-	printf("%i\n", vars.max_maps);
 	vars.map_file = av;
 	choose_map(&vars);
 	mlx_loop(vars.mlx);
@@ -65,16 +141,13 @@ int	main(int ac, char **av)
 
 
 
-
-
-
-
-
-
-//fazer check map
+//fazer check map e nome do ficheiro
 //proteger ac av
-//adicionar projeções extras
 //github prepare
+
+//quando chegar:
+//verificar teclas
+//header
 
 // void	print_map(t_vars *vars)
 // {

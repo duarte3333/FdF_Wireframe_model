@@ -1,5 +1,7 @@
 #include "fdf.h"
 
+//Esta funcao calcula o valor maximo e minimo em x e y 
+//para posteriormente colocar a imagem no centro da janela
 void	screen_dimensions(t_point a, t_vars *vars)
 {
 	int	x;

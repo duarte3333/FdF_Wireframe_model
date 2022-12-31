@@ -60,9 +60,7 @@ void	map_loading(t_vars *vars, int fd, int index)
 	else
 		vars->map = malloc(sizeof(int *) * vars->nb_lines);
 	if (line)
-	{
 		vars->map[index] = split_array(vars, line);
-	}
 	else
 		vars->map[index] = (int *)line;
 	free(line);

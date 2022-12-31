@@ -9,10 +9,12 @@ t_point	transformations(t_vars *vars, t_point a)
 	if (vars->tranform_number == 1)
 		a = isometric_projection(a, vars);
 	if (vars->tranform_number == 2)
-		a = front_view(a, vars);
+		a = parallel_projection(a, vars);
 	if (vars->tranform_number == 3)
-		a = right_view(a, vars);
+		a = top_view(a, vars);
 	if (vars->tranform_number == 4)
+		a = right_view(a, vars);
+	if (vars->tranform_number == 5)
 		a = bottom_view(a, vars);
 	return (a);
 }

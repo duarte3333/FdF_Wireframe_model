@@ -2,7 +2,7 @@ NAME = fdf
 
 CC = cc
 
-CFLAGS = -O3 -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS = -O3 -Wall -Wextra
 
 SRCS = main.c \
 	  get_next_line.c \
