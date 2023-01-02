@@ -151,9 +151,12 @@ we have the right side view and below the isometric view. Additionally in the lo
 ![flow_final drawio](https://user-images.githubusercontent.com/76222459/210188894-10131e6d-98a2-4aa4-a6c9-2c1d5d0d79a5.png)
 
 ## Menu 
-![image](https://user-images.githubusercontent.com/76222459/210263118-193710e8-e3b7-4774-8df6-6974f7610186.png)
 
-## Applications
+In order to change things in the program during is execution, the screen shows the following menu:
+
+![image](https://user-images.githubusercontent.com/76222459/210263201-d0640c2d-ea28-4a24-8258-d87fa94c301b.png)
+
+## Applications of wireframe models
 
 1. Computer-aided design (CAD): Wireframe models are often used in CAD 
 software to represent the basic structure and layout of objects and systems. 
