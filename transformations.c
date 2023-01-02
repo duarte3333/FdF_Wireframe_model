@@ -41,7 +41,7 @@ t_point	parallel_projection(t_point a, t_vars *vars)
 }
 
 //Executa o grid em 2D visto de cima mostrando pelas cores as altitudes em z 
-t_point	top_view(t_point a, t_vars *vars)
+t_point	front_view(t_point a, t_vars *vars)
 {
 	float	temp_x;
 	float	temp_y;
@@ -79,7 +79,7 @@ t_point	right_view(t_point a, t_vars *vars)
 }
 
 //Executa o grid em 2D visto de baixo
-t_point	bottom_view(t_point a, t_vars *vars)
+t_point	top_view(t_point a, t_vars *vars)
 {
 	float	temp_z;
 	float	temp_x;

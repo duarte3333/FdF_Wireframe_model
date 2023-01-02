@@ -15,7 +15,7 @@ t_point	transformations(t_vars *vars, t_point a)
 	if (vars->tranform_number == 4)
 		a = right_view(a, vars);
 	if (vars->tranform_number == 5)
-		a = bottom_view(a, vars);
+		a = front_view(a, vars);
 	return (a);
 }
 

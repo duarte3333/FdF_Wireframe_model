@@ -102,7 +102,7 @@ t_point	rotation_x(t_point a, t_vars *vars);
 t_point	isometric_projection(t_point a, t_vars *vars);
 t_point	top_view(t_point a, t_vars *vars);
 t_point	right_view(t_point a, t_vars *vars);
-t_point	bottom_view(t_point a, t_vars *vars);
+t_point	front_view(t_point a, t_vars *vars);
 t_point	parallel_projection(t_point a, t_vars *vars);
 t_point	transformations(t_vars *vars, t_point a);
 void	map_to_point(t_vars *vars);

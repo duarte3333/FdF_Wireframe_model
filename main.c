@@ -46,9 +46,11 @@ int	check_map_digits(int fd)
 {
 	int		i;
 	char	*line;
+	char	*temp;
 
+	temp = line;
 	line = get_next_line(fd);
-	while (line)
+	while (line != NULL)
 	{
 		i = 0;
 		while (line[i] && line[i] != '\n')
@@ -62,13 +64,15 @@ int	check_map_digits(int fd)
 		}
 		free(line);
 		line = get_next_line(fd);
-		if (!line)
+		if (line == NULL)
 		{
-			printf("ww");
+			printf("SOU NULL\n");
+			break ;
 		}
-		printf("%s\n", line);
+		printf("line%s\n", line);
 	}
 	printf("oita");
+	free(line);
 	return (1);
 }
 
@@ -119,7 +123,7 @@ int	check_map(t_vars *vars)
 			write(1, "That file is not in the repository.\n", 37);
 			ft_close (vars);
 		}
-		// else if (!check_map_digits_r(fd))
+		// else if (!check_map_digits(fd))
 		// {
 		// 	write(1, "That file has non-digits, please change that.\n", 47);
 		// 	ft_close (vars);
