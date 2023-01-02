@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   screen.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dsa-mora <dsa-mora@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/02 18:19:27 by dsa-mora          #+#    #+#             */
+/*   Updated: 2023/01/02 23:30:18 by dsa-mora         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void	bigger_case(t_vars *vars)
@@ -12,10 +24,10 @@ void	bigger_case(t_vars *vars)
 		vars->size_grid /= 2;
 		if (vars->size_grid < 1)
 		{
-			if (vars->screen.max_y > 1200)
-				vars->screen.max_y = 1200;
-			if (vars->screen.max_x > 1920)
-				vars->screen.max_x = 1920;
+			if (vars->screen.max_y > WINDOW_HEIGHT)
+				vars->screen.max_y = WINDOW_HEIGHT;
+			if (vars->screen.max_x > WINDOW_WIDTH)
+				vars->screen.max_x = WINDOW_WIDTH;
 			break ;
 		}
 	}

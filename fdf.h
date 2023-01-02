@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dsa-mora <dsa-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 18:29:15 by dsa-mora          #+#    #+#             */
-/*   Updated: 2022/11/19 16:48:58 by dsa-mora         ###   ########.fr       */
+/*   Updated: 2023/01/02 23:56:09 by dsa-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <stdlib.h>
 
 # define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1200
+# define WINDOW_HEIGHT 1060
 # define MLX_ERROR 1
 
 typedef struct s_data{
@@ -90,7 +90,6 @@ typedef struct s_vars {
 	float		angle_p;
 }				t_vars;
 
-
 char	*get_next_line(int fd);
 void	map_loading(t_vars *vars, int fd, int index);
 void	ft_max_and_min(int nb, t_vars *vars);
@@ -127,5 +126,8 @@ void	handle_projection(int keysym, t_vars *vars);
 void	free_map(t_vars *vars);
 int		change_map(t_vars *vars, int i);
 void	free_map(t_vars *vars);
+int		check_map(t_vars *vars);
+int		counter(char *line);
+int		strcmp_fdf(char *a);
 
 #endif

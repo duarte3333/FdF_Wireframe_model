@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keys.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dsa-mora <dsa-mora@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/02 18:18:17 by dsa-mora          #+#    #+#             */
+/*   Updated: 2023/01/02 18:22:39 by dsa-mora         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 //Estas sao as funcoes responsaveis pelo gerenciamento de teclas
@@ -25,7 +37,6 @@ void	handle_parte_one(int keysym, t_vars *vars)
 int	handle_keypress(int keysym, t_vars *vars)
 {
 	clean_img(vars);
-
 	handle_parte_one(keysym, vars);
 	if (keysym == 49 || keysym == 50 || keysym == '0' || keysym == '9')
 		handle_color(keysym, vars);

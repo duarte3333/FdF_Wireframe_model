@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_grid.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dsa-mora <dsa-mora@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/02 18:17:58 by dsa-mora          #+#    #+#             */
+/*   Updated: 2023/01/02 23:34:07 by dsa-mora         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 t_point	transformations(t_vars *vars, t_point a)
@@ -35,7 +47,6 @@ void	edge_case(t_vars *vars, t_point a, t_point b, float range, float x)
 		flag++;
 	}
 	return ;
-
 }
 
 void	inicializer(t_vars *vars, t_point a, t_point b, float x)

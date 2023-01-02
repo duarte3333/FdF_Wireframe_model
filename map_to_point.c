@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_to_point.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dsa-mora <dsa-mora@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/02 18:18:48 by dsa-mora          #+#    #+#             */
+/*   Updated: 2023/01/02 22:09:44 by dsa-mora         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 //Esta funcao calcula o valor maximo e minimo em x e y 
@@ -8,9 +20,9 @@ void	screen_dimensions(t_point a, t_vars *vars)
 	int	y;
 
 	if (vars->max_z - vars->min_z > 90)
-		vars->z_modify = 10;
+		vars->z_modify = 9;
 	if (vars->max_z - vars->min_z > 900)
-		vars->z_modify = 100;
+		vars->z_modify = 90;
 	a = isometric_projection(a, vars);
 	x = a.x;
 	y = a.y;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dsa-mora <dsa-mora@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/02 22:10:16 by dsa-mora          #+#    #+#             */
+/*   Updated: 2023/01/02 23:48:12 by dsa-mora         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 //Esta funcao irá guardar o maximo elemento z e o minimo nas vars
@@ -30,7 +42,6 @@ int	*split_array(t_vars *vars, char *line)
 		size++;
 	vars->nb_cols = size;
 	t = malloc(sizeof(int) * size);
-
 	while (i < size)
 	{
 		t[i] = ft_atoi(temp[i]);
@@ -65,5 +76,3 @@ void	map_loading(t_vars *vars, int fd, int index)
 		vars->map[index] = (int *)line;
 	free(line);
 }
-
-

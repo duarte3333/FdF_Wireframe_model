@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dsa-mora <dsa-mora@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/02 18:17:46 by dsa-mora          #+#    #+#             */
+/*   Updated: 2023/01/02 18:22:59 by dsa-mora         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
@@ -39,7 +51,6 @@ int	make_color(float percent, int flag, int r, int g)
 		return (create_trgb(0, g, r, g));
 	else if (flag == 9)
 		return (create_trgb(0, g / 3, r / 0.5, r / 1.25));
-
 	return (0);
 }
 

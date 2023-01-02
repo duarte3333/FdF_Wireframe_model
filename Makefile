@@ -2,7 +2,7 @@ NAME = fdf
 
 CC = cc
 
-CFLAGS = -O3 -Wall -Wextra -fsanitize=address -g
+CFLAGS = -O3 -Wall -Wextra -Werror -fsanitize=address -g
 
 SRCS = main.c \
 	  get_next_line.c \
@@ -17,7 +17,9 @@ SRCS = main.c \
 	  transformations.c \
 	  menu.c \
 	  screen.c \
-	  rotations.c
+	  rotations.c \
+	  check_map.c \
+	  check_map2.c
 
 OBJS	= ${SRCS:.c=.o}
 

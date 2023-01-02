@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dsa-mora <dsa-mora@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/02 18:18:57 by dsa-mora          #+#    #+#             */
+/*   Updated: 2023/01/02 23:26:26 by dsa-mora         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void	ft_set_variables(t_vars *vars)
@@ -8,7 +20,7 @@ void	ft_set_variables(t_vars *vars)
 	vars->phi = 0;
 	vars->qsi = 0;
 	vars->flag = 4;
-	vars->size_grid = 10;
+	vars->size_grid = 9;
 	vars->angle_y = 0.523599;
 	vars->angle_x = 0.523599;
 	vars->angle_p = 0.7854;
@@ -20,117 +32,6 @@ void	ft_set_variables(t_vars *vars)
 	vars->max_z = 0;
 	vars->min_z = 0;
 	vars->tranform_number = 1;
-}
-
-int	strcmp_fdf(char *a)
-{
-	int		i;
-	int		j;
-	char	*b;
-
-	b = ".fdf";
-	i = 0;
-	j = -1;
-	while (a[i] != 0)
-		i++;
-	i -= 5;
-	while (a[++i] != 0)
-	{
-		if (a[i] != b[++j])
-			return (0);
-	}
-	return (1);
-}
-
-int	check_map_digits(int fd)
-{
-	int		i;
-	char	*line;
-	char	*temp;
-
-	temp = line;
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		i = 0;
-		while (line[i] && line[i] != '\n')
-		{
-			if (!ft_isdigit(line[i]) && line[i] != '\t' && line[i] != ' ')
-			{
-				write (1, "Detected a non-digit\n", 22);
-				return (0);
-			}
-			i++;
-		}
-		free(line);
-		line = get_next_line(fd);
-		if (line == NULL)
-		{
-			printf("SOU NULL\n");
-			break ;
-		}
-		printf("line%s\n", line);
-	}
-	printf("oita");
-	free(line);
-	return (1);
-}
-
-int	check_map_digits_r(int fd)
-{
-	int		i;
-	char	*line;
-
-	line = get_next_line(fd);
-	if (line)
-	{
-		i = 0;
-		while (line[i] != NULL && line[i] != '\n')
-		{
-			if (!ft_isdigit(line[i]) && line[i] != '\t' \
-			&& line[i] != ' ' && line)
-			{
-				write (1, "Detected a non-digit\n", 22);
-				return (0);
-			}
-			i++;
-		}
-		printf("line%s\n", line);
-		check_map_digits_r(fd);
-	}
-	else
-	{
-		printf("adeus\n");
-	}
-	free(line);
-	return (1);
-}
-
-int	check_map(t_vars *vars)
-{
-	int	fd;
-
-	if (!strcmp_fdf(vars->map_file[vars->map_number]))
-	{
-		write(1, "That file is not a .fdf file\n", 30);
-		ft_close (vars);
-	}
-	else
-	{
-		fd = open(vars->map_file[vars->map_number], O_RDONLY);
-		if (fd == -1)
-		{
-			write(1, "That file is not in the repository.\n", 37);
-			ft_close (vars);
-		}
-		// else if (!check_map_digits(fd))
-		// {
-		// 	write(1, "That file has non-digits, please change that.\n", 47);
-		// 	ft_close (vars);
-		// }
-		// printf("saiu");
-	}
-	return (fd);
 }
 
 //Cria uma janela, uma imagem e desenha para um dado mapa
@@ -175,34 +76,3 @@ int	main(int ac, char **av)
 	choose_map(&vars);
 	mlx_loop(vars.mlx);
 }
-
-
-
-//fazer check map e nome do ficheiro
-//proteger ac av
-//github prepare
-
-//quando chegar:
-//verificar teclas
-//header
-
-// void	print_map(t_vars *vars)
-// {
-// 	int	x;
-// 	int	y;
-
-// 	x = 0;
-// 	while (vars->map[x])
-// 	{
-// 		y = 0;
-// 		while (y < vars->nb_cols)
-// 		{
-// 			printf(" %i,", vars->map[x][y]);
-// 			y++;
-// 		}
-// 		printf("\n");
-// 		x++;
-// 	}
-// 	printf("cols: %i\n", vars->nb_cols);
-// 	printf("line : %i\n", vars->nb_lines);
-// }

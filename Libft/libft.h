@@ -19,7 +19,7 @@
 
 typedef struct s_list
 {
-	char            *content;
+	char			*content;
 	struct s_list	*next;
 }				t_list;
 

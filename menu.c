@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   menu.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dsa-mora <dsa-mora@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/02 18:17:24 by dsa-mora          #+#    #+#             */
+/*   Updated: 2023/01/02 23:51:02 by dsa-mora         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 //Estas funcoes usam a mlx_string_put() para escrever os comandos
@@ -27,13 +39,13 @@ void	projection_type(t_vars *vars)
 		mlx_string_put(vars->mlx, vars->win, s, y, 0xAFA9A9, "Right View");
 	else if (vars->tranform_number == 5)
 		mlx_string_put(vars->mlx, vars->win, s, y, 0xAFA9A9, "Bottom View");
+	mlx_string_put(vars->mlx, vars->win, 100, 20, 0xAFA9A9, "COMMANDS");
+	mlx_string_put(vars->mlx, vars->win, 100, 50, 0xAFA9A9, "/\\ - up");
 }
 
 void	ft_part_one(t_vars *vars)
 {
 	projection_type (vars);
-	mlx_string_put(vars->mlx, vars->win, 100, 20, 0xAFA9A9, "COMMANDS");
-	mlx_string_put(vars->mlx, vars->win, 100, 50, 0xAFA9A9, "/\\ - up");
 	mlx_string_put(vars->mlx, vars->win, 100, 75, 0xAFA9A9, "< - left");
 	mlx_string_put(vars->mlx, vars->win, 100, 100, 0xAFA9A9, "> - right");
 	mlx_string_put(vars->mlx, vars->win, 100, 125, 0xAFA9A9, "\\/ - bottom");
@@ -55,6 +67,8 @@ void	ft_part_one(t_vars *vars)
 		"a and d - rotation z");
 	mlx_string_put(vars->mlx, vars->win, 100, 350, 0xAFA9A9, \
 		"i and k - rotation x");
+	mlx_string_put(vars->mlx, vars->win, 100, 375, 0xAFA9A9, \
+		"j and l - rotation y");
 }
 
 void	ft_menu(t_vars *vars)
@@ -62,8 +76,6 @@ void	ft_menu(t_vars *vars)
 	if (vars->map_option == 1)
 	{
 		ft_part_one(vars);
-		mlx_string_put(vars->mlx, vars->win, 100, 375, 0xAFA9A9, \
-		"j and l - rotation y");
 		mlx_string_put(vars->mlx, vars->win, 100, 400, 0xAFA9A9, \
 		"7 and 8 - rotation parallel y");
 		mlx_string_put(vars->mlx, vars->win, 100, \
@@ -77,12 +89,12 @@ void	ft_menu(t_vars *vars)
 		mlx_string_put(vars->mlx, vars->win, 100, 525, 0xAFA9A9, \
 		"m - change map");
 		mlx_string_put(vars->mlx, vars->win, 100, \
-			575, 0xAFA9A9, "r - reset map");
+			550, 0xAFA9A9, "r - reset map");
 		mlx_string_put(vars->mlx, vars->win, WINDOW_WIDTH - 125, \
 			20, 0xAFA9A9, "MAP NAME");
 		mlx_string_put(vars->mlx, vars->win, WINDOW_WIDTH - 125, \
 			40, 0xAFA9A9, vars->map_file[vars->map_number]);
 		mlx_string_put(vars->mlx, vars->win, 100, \
-			WINDOW_HEIGHT - 100, 0xAFA9A9, "By: Duarte Morais");
+			WINDOW_HEIGHT - 25, 0xAFA9A9, "By: Duarte Morais");
 	}
 }
