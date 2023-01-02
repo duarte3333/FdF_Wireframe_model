@@ -1,7 +1,10 @@
 
 # Creating a Wireframe model
+<p align="center">
+	<img class="center" src="https://user-images.githubusercontent.com/76222459/210257207-1f52b93c-ed83-4b5a-bad9-cd5f2400a37d.png" width=70% height=70%>
+</p>
 
-## Explanation
+## Introduction
 Wireframe models are an essential tool in the world 
 of graphics programming, as they allow designers and 
 developers to visualize and understand the structure 
@@ -25,22 +28,6 @@ modify the model as needed. By adjusting the position of points
 and line segments, we were able to refine the overall structure 
 and layout of the landscape to better match our desired design.
 
-## Results
-
-![Screenshot from 2022-12-29 05-14-49](https://user-images.githubusercontent.com/76222459/210188332-9427c3c5-e4ef-411e-975c-48ece02b47b0.png)
-
-![Screenshot from 2022-12-29 05-14-21](https://user-images.githubusercontent.com/76222459/210188411-1f8f05b4-1f00-4efd-a53e-15325b88203a.png)
-
-![combine_images (6)](https://user-images.githubusercontent.com/76222459/210188860-d25d44e4-491e-4b19-89ab-8e977532cc72.jpg)
-
-## Views
-The possible views of the program, in the upper left corner we have the front view, below we have the top view. In the lower left corner is the projection of the right view and below it is the isometric projection.
-
-![combine_images (4)](https://user-images.githubusercontent.com/76222459/210188733-c10e692a-85d1-4fdc-8076-2bf1ba5412ca.jpg)
-
-In addition, a parallel view has been added to the program:
-
-![Screenshot from 2023-01-02 ###### 00-31-18](https://user-images.githubusercontent.com/76222459/210188983-d0071bac-f382-4567-a7a2-990ada79dc08.png)
 
 ## Theory
 ### Isometric projection
@@ -144,12 +131,33 @@ After knowing what percentage of the scale each z was in the scale, I called a f
 color.c file that based on that percentage choose the color of the point.
 
 Check out a video of the gradient colors that I created: [Colors](https://user-images.githubusercontent.com/76222459/210249785-361b50f2-f969-4aa6-878b-f93eeea3a4dd.webm)
+## Results
+
+
+<img src="https://user-images.githubusercontent.com/76222459/210259689-454fa6e6-0368-4380-8e8d-c13eaabcdb7a.jpg" width=120% height=120%>
+
+
+<img src="https://user-images.githubusercontent.com/76222459/210260366-b766a492-7a79-498c-9961-603c6c137e82.jpg" width=100% height=120%>
+
+![combine_images (22)](https://user-images.githubusercontent.com/76222459/210262922-7c640a93-7912-4afe-8b1c-688d61baa5b2.jpg)
+
+## Possible Views
+![combine_images (21)](https://user-images.githubusercontent.com/76222459/210261931-f13bbba1-d4bd-41c6-ac27-bf9a4de3b56a.jpg)
+The possible views of the program, in the upper left corner we have the front view, below we have the top view. In the center 
+we have the right side view and below the isometric view. Additionally in the lower right corner it is possible to see the parallel view.
+
+
+## Flowchart
+![flow_final drawio](https://user-images.githubusercontent.com/76222459/210188894-10131e6d-98a2-4aa4-a6c9-2c1d5d0d79a5.png)
+
+## Menu 
+![image](https://user-images.githubusercontent.com/76222459/210263118-193710e8-e3b7-4774-8df6-6974f7610186.png)
 
 ## Applications
 
-<par>1. Computer-aided design (CAD): Wireframe models are often used in CAD 
+1. Computer-aided design (CAD): Wireframe models are often used in CAD 
 software to represent the basic structure and layout of objects and systems. 
-infrastructure to automobiles and aircraft.</par>
+infrastructure to automobiles and aircraft.
 
 2. Computer graphics: Wireframe models are commonly used in computer 
 graphics to represent 3D objects in games and other interactive media. 
@@ -169,8 +177,6 @@ planning stages.
 6. Virtual reality: Wireframe models are often used to create immersive 
 virtual reality experiences, as they provide a basic structure and layout 
 for the virtual environment without the need for high levels of detail.
-## Flowchart
-![flow_final drawio](https://user-images.githubusercontent.com/76222459/210188894-10131e6d-98a2-4aa4-a6c9-2c1d5d0d79a5.png)
 
 ### Minilibx
 
