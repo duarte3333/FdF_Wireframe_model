@@ -11,7 +11,7 @@ t_point	isometric_projection(t_point a, t_vars *vars)
 	a.x = ((temp_x - temp_y) * \
 		cos(vars->angle_x)) * vars->size_grid + vars->offset_x;
 	a.y = ((-(a.z) / vars->z_modify + (temp_x + temp_y) * \
-	sin(vars->angle_x))) * vars->size_grid + vars->offset_y;
+	sin(vars->angle_y))) * vars->size_grid + vars->offset_y;
 	vars->new_max = vars->max_z;
 	if (vars->min_z < 0 || (vars->min_z < 0 && vars->max_z < 0))
 	{

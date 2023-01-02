@@ -45,28 +45,60 @@ int	strcmp_fdf(char *a)
 int	check_map_digits(int fd)
 {
 	int		i;
-	int		size;
 	char	*line;
 
-	i = 0;
 	line = get_next_line(fd);
-	while (line != NULL)
+	while (line)
 	{
-		line = get_next_line(fd);
-		while (line[i] != '\0')
+		i = 0;
+		while (line[i] && line[i] != '\n')
 		{
-			if (line[i] == '\n')
-				break ;
-			printf("%c\n", line[i]);
-			if (!ft_isdigit(line[i]) && line[i] != '\t' \
-			&& line[i] != '\n' && line[i] != ' ')
+			if (!ft_isdigit(line[i]) && line[i] != '\t' && line[i] != ' ')
 			{
 				write (1, "Detected a non-digit\n", 22);
 				return (0);
 			}
 			i++;
 		}
+		free(line);
+		line = get_next_line(fd);
+		if (!line)
+		{
+			printf("ww");
+		}
+		printf("%s\n", line);
 	}
+	printf("oita");
+	return (1);
+}
+
+int	check_map_digits_r(int fd)
+{
+	int		i;
+	char	*line;
+
+	line = get_next_line(fd);
+	if (line)
+	{
+		i = 0;
+		while (line[i] != NULL && line[i] != '\n')
+		{
+			if (!ft_isdigit(line[i]) && line[i] != '\t' \
+			&& line[i] != ' ' && line)
+			{
+				write (1, "Detected a non-digit\n", 22);
+				return (0);
+			}
+			i++;
+		}
+		printf("line%s\n", line);
+		check_map_digits_r(fd);
+	}
+	else
+	{
+		printf("adeus\n");
+	}
+	free(line);
 	return (1);
 }
 
@@ -87,11 +119,12 @@ int	check_map(t_vars *vars)
 			write(1, "That file is not in the repository.\n", 37);
 			ft_close (vars);
 		}
-		// if (check_map_digits(fd))
+		// else if (!check_map_digits_r(fd))
 		// {
 		// 	write(1, "That file has non-digits, please change that.\n", 47);
 		// 	ft_close (vars);
 		// }
+		// printf("saiu");
 	}
 	return (fd);
 }
@@ -131,7 +164,7 @@ int	main(int ac, char **av)
 	vars.mlx = mlx_init();
 	vars.map_number = 1;
 	vars.max_maps = 0;
-	vars.map_option = 0;
+	vars.map_option = 1;
 	while (av[vars.max_maps] != NULL)
 		vars.max_maps++;
 	vars.map_file = av;

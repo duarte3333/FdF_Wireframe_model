@@ -23,7 +23,7 @@ static size_t	ft_strlen_nl(const char *str)
 	i = 0;
 	if (!str)
 		return (0);
-	while (str[i] && str[i] != '\n' )
+	while (str[i] && str[i] != '\n')
 		i++;
 	if (str[i] == '\n')
 		i++;
