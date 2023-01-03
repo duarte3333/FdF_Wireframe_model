@@ -25,7 +25,7 @@ any potential issues or areas for improvement.
 One of the key advantages of using a wireframe model in this 
 context is the ability to quickly and easily manipulate and 
 modify the model as needed. By adjusting the position of points 
-and line segments, we were able to refine the overall structure 
+and line segments, I was able to refine the overall structure 
 and layout of the landscape to better match our desired design.
 
 
