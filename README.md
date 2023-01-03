@@ -109,8 +109,8 @@ the height of the projection.
 
 To do this, at each line drawn, I defined the difference between 
 the maximum and minimum height of the begin and end points with the variable 
-vars->range_z. At first the vars-rgb_p represents the percentage in the scale 
-where at z_min is zero and at z_max is one of the first point of the line.
+vars->range_z. At first the vars-rgb_p represents the percentage of the first point of the line in the scale 
+where at z_min is zero and at z_max is one.
 ```c
     vars->rgb_p = a.z / vars->new_max;
 	if (b.z - a.z > 0)
