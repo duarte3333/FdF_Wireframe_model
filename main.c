@@ -12,6 +12,7 @@
 
 #include "fdf.h"
 
+/* Define some variables; grid=11 for school */
 void	ft_set_variables(t_vars *vars)
 {
 	vars->offset_x = 0;
@@ -20,7 +21,7 @@ void	ft_set_variables(t_vars *vars)
 	vars->phi = 0;
 	vars->qsi = 0;
 	vars->flag = 4;
-	vars->size_grid = 9;
+	vars->size_grid = 10;
 	vars->angle_y = 0.523599;
 	vars->angle_x = 0.523599;
 	vars->angle_p = 0.7854;
@@ -34,7 +35,7 @@ void	ft_set_variables(t_vars *vars)
 	vars->tranform_number = 1;
 }
 
-//Cria uma janela, uma imagem e desenha para um dado mapa
+/* Cria uma janela, uma imagem e desenha para um dado mapa */
 void	choose_map(t_vars *vars)
 {
 	int	fd;
@@ -60,19 +61,22 @@ void	choose_map(t_vars *vars)
 	draw_img_grid(vars);
 }
 
-//falta proteger os ac's
 int	main(int ac, char **av)
 {
 	static t_vars	vars;
 
-	(void) ac;
-	vars.mlx = mlx_init();
-	vars.map_number = 1;
-	vars.max_maps = 0;
-	vars.map_option = 1;
-	while (av[vars.max_maps] != NULL)
-		vars.max_maps++;
-	vars.map_file = av;
-	choose_map(&vars);
-	mlx_loop(vars.mlx);
+	if (ac >= 2)
+	{
+		vars.mlx = mlx_init();
+		vars.map_number = 1;
+		vars.max_maps = 0;
+		vars.map_option = 1;
+		while (av[vars.max_maps] != NULL)
+			vars.max_maps++;
+		vars.map_file = av;
+		choose_map(&vars);
+		mlx_loop(vars.mlx);
+	}
+	else
+		write(1, "Not enough arguments\n", 22);
 }

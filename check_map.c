@@ -12,6 +12,7 @@
 
 #include "fdf.h"
 
+/* Check if the file is empty */
 void	check_empty(t_vars *vars, char *line)
 {
 	if (line == NULL)
@@ -21,33 +22,39 @@ void	check_empty(t_vars *vars, char *line)
 	}
 }
 
+/* Detete caracteres que nao sejam digitos 
+Ele deixa passar se a seguir ao numero estiver uma virgula
+para o caso dos mapas com cores incorporadas*/
 int	detect_non_digit(t_vars *vars, char *line)
 {
-	int		size_col;
+	char	**temp;
 	int		i;
+	int		col_size;
 
-	i = -1;
-	size_col = counter(line);
-	i = 0;
-	if (size_col == 0)
+	col_size = 0;
+	if (!line)
+		return (0);
+	temp = ft_split(line, ' ');
+	while (temp[col_size])
 	{
-		write (1, "Detected a line without digits.\n", 32);
-		ft_close (vars);
-	}
-	while (line[i] && line[i] != '\n')
-	{
-		if (!ft_isdigit(line[i]) \
-		&& line[i] != '\t' && line[i] != ' ' && \
-		(line[i] == '-' && !ft_isdigit(line[i + 1])))
+		i = 0;
+		while (temp[col_size][i] && temp[col_size][i] != '\n')
 		{
-			write (1, "Detected a non-digit!\n", 22);
-			ft_close (vars);
+			if (temp[col_size][i] == ',')
+				break ;	
+			if (temp[col_size][i] == '-' && i == 0)
+				i++;
+			if (!ft_isdigit(temp[col_size][i]))
+				free_split(temp, 1, vars);	
+			i++;
 		}
-		i++;
+		col_size++;
 	}
-	return (size_col);
+	free_split(temp, 2, vars);
+	return (col_size);
 }
 
+/* Verifica se existem caracteres nao autorizados no mapa */
 int	check_map_digits(int fd, t_vars *vars)
 {
 	char	*line;
@@ -57,24 +64,26 @@ int	check_map_digits(int fd, t_vars *vars)
 
 	line = get_next_line(fd);
 	check_empty(vars, line);
-	col_size = counter(line);
+	col_size = detect_non_digit(vars, line);
 	line_size = 0;
-	while (line != NULL)
+	while (line)
 	{
-		size_col = detect_non_digit(vars, line);
 		free(line);
 		line = get_next_line(fd);
-		if (line == NULL && (line_size == 1 || line_size == 2) \
-		&& size_col == 1)
+		if (line)
+			size_col = detect_non_digit(vars, line);
+		if (col_size != size_col)
 		{
-			write (1, "File has only one or two digits vertically.\n", 45);
-			ft_close (vars);
+			free(line);
+			write (1, "The map is neither square nor rectangular.\n", 44);
+			exit(0);
 		}
 	}
 	free(line);
 	return (1);
 }
 
+/* Verifica todas as possibilidades para que o mapa pode falhar */
 int	check_map(t_vars *vars)
 {
 	int	fd;

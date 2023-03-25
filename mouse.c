@@ -12,6 +12,7 @@
 
 #include "fdf.h"
 
+/* Destroy window and image */
 void	free_mlx(t_vars *vars)
 {
 	if (vars->win)
@@ -22,7 +23,7 @@ void	free_mlx(t_vars *vars)
 	free(vars->mlx);
 }
 
-//Termina a janela
+/* Termina a janela */
 int	ft_close(void *o)
 {
 	free_map((t_vars *) o);
@@ -31,8 +32,8 @@ int	ft_close(void *o)
 	return (0);
 }
 
-//Coloca todos os pixels a preto para dar refresh 
-//caso se desenhe de novo
+/* Coloca todos os pixels a preto para dar refresh 
+caso se desenhe de novo */
 void	clean_img(t_vars *vars)
 {
 	int	i;
@@ -47,7 +48,7 @@ void	clean_img(t_vars *vars)
 	}
 }
 
-//Executa variacoes com base em acoes do rato
+/* Esta funcao executa variacoes com base em acoes do rato */
 int	mouse_hook(int button, int x, int y, t_vars *vars)
 {
 	clean_img(vars);

@@ -26,9 +26,11 @@
 # include <stdlib.h>
 
 # define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1060
+# define WINDOW_HEIGHT 1200
 # define MLX_ERROR 1
 
+//1920
+//1060
 typedef struct s_data{
 	void	*img;
 	char	*addr;
@@ -90,11 +92,14 @@ typedef struct s_vars {
 	float		angle_p;
 }				t_vars;
 
+//Parsing and inicialization
 char	*get_next_line(int fd);
 void	map_loading(t_vars *vars, int fd, int index);
 void	ft_max_and_min(int nb, t_vars *vars);
 void	ft_set_variables(t_vars *vars);
 t_point	init_point(int x, int y, int z);
+
+//Rotations and projections
 t_point	rotation_z(t_point a, t_vars *vars);
 t_point	rotation_y(t_point a, t_vars *vars);
 t_point	rotation_x(t_point a, t_vars *vars);
@@ -104,14 +109,17 @@ t_point	right_view(t_point a, t_vars *vars);
 t_point	front_view(t_point a, t_vars *vars);
 t_point	parallel_projection(t_point a, t_vars *vars);
 t_point	transformations(t_vars *vars, t_point a);
+
+//Generate the list of points and draw them
 void	map_to_point(t_vars *vars);
 void	draw_img_grid(t_vars *vars);
+
+//Gradient creation
 int		percent_to_color(float percent, int flag);
 int		create_trgb(int t, int r, int g, int b);
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
-void	choose_map(t_vars *vars);
-int		ft_close(void *o);
-void	clean_img(t_vars *vars);
+
+//Keyboard management
 int		mouse_hook(int button, int x, int y, t_vars *vars);
 int		handle_keypress(int keysym, t_vars *vars);
 void	ft_menu(t_vars *vars);
@@ -123,11 +131,17 @@ void	handle_color(int keysym, t_vars *vars);
 void	handle_rotation(int keysym, t_vars *vars);
 void	handle_z(int keysym, t_vars *vars);
 void	handle_projection(int keysym, t_vars *vars);
-void	free_map(t_vars *vars);
+
+//Exit and change map
+int		ft_close(void *o);
+void	clean_img(t_vars *vars);
 int		change_map(t_vars *vars, int i);
 void	free_map(t_vars *vars);
+
+//Maps checking
+void	choose_map(t_vars *vars);
 int		check_map(t_vars *vars);
-int		counter(char *line);
+void	free_split(char **temp, int opt, t_vars *vars);
 int		strcmp_fdf(char *a);
 
 #endif

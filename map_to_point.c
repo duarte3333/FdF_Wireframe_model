@@ -12,8 +12,8 @@
 
 #include "fdf.h"
 
-//Esta funcao calcula o valor maximo e minimo em x e y 
-//para posteriormente colocar a imagem no centro da janela
+/* Esta funcao calcula o valor maximo e minimo em x e y 
+para posteriormente colocar a imagem no centro da janela */
 void	screen_dimensions(t_point a, t_vars *vars)
 {
 	int	x;
@@ -36,9 +36,9 @@ void	screen_dimensions(t_point a, t_vars *vars)
 		vars->screen.max_y = y;
 }
 
-//Esta funcao cria uma lista de listas de t_points
-//point_map = {{point1, point2, point3}, {point4, point5, point6}, ... }
-//No fundo gera o map sendo que em cada entrada temos um point
+/* Esta funcao cria uma lista de listas de t_points
+   point_map = {{point1, point2, point3}, {point4, point5, point6}, ... }
+   No fundo gera o map sendo que em cada entrada temos um point */
 void	map_to_point(t_vars *vars)
 {
 	int	x;

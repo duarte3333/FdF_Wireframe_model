@@ -12,6 +12,7 @@
 
 #include "fdf.h"
 
+/* Esta funcao permite verificar se o ficheiro é .fdf */
 int	strcmp_fdf(char *a)
 {
 	int		i;
@@ -32,21 +33,22 @@ int	strcmp_fdf(char *a)
 	return (1);
 }
 
-int	counter(char *line)
+/* Esta funcao ou liberta a lista de strings geradas pelo split ou 
+invoca o print que diz que detetou um nao digito */
+void	free_split(char **temp, int opt, t_vars *vars)
 {
-	char	**temp;
-	int		i;
-	int		col_size;
+	int	i;
 
-	col_size = 0;
-	i = -1;
-	temp = ft_split(line, ' ');
-	while (temp[col_size])
-		col_size++;
-	while (++i < col_size)
+	if (opt == 1)
 	{
-		free(temp[i]);
+		write (1, "Detected a non-digit!\n", 22);
+		ft_close (vars);
 	}
-	free(temp);
-	return (col_size);
+	if (opt == 2)
+	{
+		i = 0;
+		while (temp[i])
+			free(temp[i++]);
+		free(temp);
+	}
 }
