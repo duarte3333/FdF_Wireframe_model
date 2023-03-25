@@ -4,7 +4,7 @@
 	<a href="https://www.youtube.com/watch?v=YX3Kaq3ehL4&ab_channel=DuarteMorais"</a><img class="center" src="https://user-images.githubusercontent.com/76222459/210257207-1f52b93c-ed83-4b5a-bad9-cd5f2400a37d.png" width=70% height=70%>
 </p>
 <p align="center">
-<b>Click on the image to see the video</b>
+<b>Click on the image to see the video (Put in 1080p !)</b>
 </p>
 
 ## Introduction
